@@ -1,7 +1,7 @@
 {
-  "name": "react-phone-input-2",
+  "name": "material-ui-phone-number",
   "version": "1.0.0",
-  "description": "A react component to format phone numbers",
+  "description": "A material-ui react component to format phone numbers. Based on react-phone-input-2",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,9 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bl00mber/react-phone-input-2"
+    "url": "https://github.com/alexplumb/material-ui-phone-input"
   },
   "keywords": [
+    "material",
     "react",
     "phone",
     "format",
@@ -20,9 +21,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bl00mber/react-phone-input-2/issues"
+    "url": "https://github.com/alexplumb/material-ui-phone-input/issues"
   },
-  "homepage": "https://github.com/bl00mber/react-phone-input-2",
+  "homepage": "https://github.com/alexplumb/material-ui-phone-input",
   "devDependencies": {
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
