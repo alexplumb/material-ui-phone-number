@@ -1,10 +1,10 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { TextField, InputAdornment, Menu, MenuItem, Button, withStyles } from '@material-ui/core';
 import { some, find, reduce, map, filter, includes } from 'lodash/collection';
 import { findIndex, head, tail } from 'lodash/array';
 import { debounce, memoize } from 'lodash/function';
 import { trim, startsWith } from 'lodash/string';
-import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { document } from './global.js';
 import countryData from './country_data.js';
