@@ -1,37 +1,55 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const TARGET = process.env.TARGET;
 const ROOT_PATH = path.resolve(__dirname);
-const nodeModulesDir = path.join(ROOT_PATH, 'node_modules');
 
 //Common configuration settings
 const common = {
   entry: path.resolve(ROOT_PATH, 'src/index.js'),
   resolve: {
-    extensions: ['', '.js', '.jsx'],
-    modulesDirectories: ['node_modules']
+    extensions: ['.js', '.jsx'],
+    modules: [path.resolve(__dirname, 'node_modules')],
   },
   output: {
     path: path.resolve(ROOT_PATH, 'dist'),
     filename: 'index.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel',
-        include: path.resolve(ROOT_PATH, 'src')
+        include: path.resolve(ROOT_PATH, 'src'),
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-react',
+            ],
+            plugins: [
+              ['@babel/plugin-proposal-class-properties', { loose: false }],
+              '@babel/plugin-proposal-object-rest-spread',
+              'react-hot-loader/babel',
+            ],
+          },
+        },
       },
       {
         test: /\.png.*$/,
-        loaders: ['url-loader?limit=100000&mimetype=image/png'],
+        use: 'url-loader?limit=100000&mimetype=image/png',
         exclude: /node_modules/
       },
       {
         test: /\.less$/,
-        loader: 'style!css!less'
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'less-loader' },
+        ],
       }
     ]
   }
@@ -42,15 +60,17 @@ if (TARGET === 'dev') {
   module.exports = merge(common, {
     devtool: 'inline-source-map',
     devServer: {
-      publicPath: 'http://localhost:8181/',
-      port: '8181',
-      host: '0.0.0.0',
-      colors: true,
-      historyApiFallback: true,
-      hot: true,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,PATCH,OPTIONS',
+        'Access-Control-Allow-Headers': 'content-type,authorization,accept',
+      },
+      port: 8181,
       inline: true,
-      progress: true,
-      contentBase: 'dist'
+      historyApiFallback: true,
+      clientLogLevel: 'none',
+      open: true,
+      contentBase: 'dist',
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
@@ -67,13 +87,14 @@ if (TARGET === 'dev') {
 //Production configuration settings
 if (TARGET === 'build') {
   module.exports = merge(common, {
+    mode: 'production',
     entry: {
-      'react-phone-input': path.resolve(ROOT_PATH, 'src/index.js')
+      'material-ui-phone-input': path.resolve(ROOT_PATH, 'src/index.js')
     },
     output: {
       path: path.resolve(ROOT_PATH, 'dist'),
       filename: 'index.js',
-      library: 'ReactPhoneInput',
+      library: 'MaterialUiPhoneInput',
       libraryTarget: 'umd'
     },
     externals: [{
@@ -85,6 +106,45 @@ if (TARGET === 'build') {
         amd: 'react'
       }
     }],
+    optimization: {
+      minimizer: [
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            compress: {
+              warnings: false,
+              // Disabled because of an issue with Uglify breaking seemingly valid code:
+              // https://github.com/facebook/create-react-app/issues/2376
+              // Pending further investigation:
+              // https://github.com/mishoo/UglifyJS2/issues/2011
+              comparisons: false,
+            },
+            output: {
+              comments: false,
+              // Turned on because emoji and regex is not minified properly using default
+              // https://github.com/facebook/create-react-app/issues/2488
+              ascii_only: true,
+            },
+          },
+          // Use multi-process parallel running to improve the build speed
+          // Default number of concurrent runs: os.cpus().length - 1
+          parallel: true,
+          // Enable file caching
+          cache: true,
+          sourceMap: true,
+        }),
+        new OptimizeCSSAssetsPlugin(),
+      ],
+      // Automatically split vendor and commons
+      // https://twitter.com/wSokra/status/969633336732905474
+      // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
+      splitChunks: {
+        chunks: 'all',
+        name: 'vendors',
+      },
+      // Keep the runtime chunk seperated to enable long term caching
+      // https://twitter.com/wSokra/status/969679223278505985
+      runtimeChunk: true,
+    },
     plugins: [
       new webpack.DefinePlugin({
         'process.env': {
@@ -92,12 +152,6 @@ if (TARGET === 'build') {
         },
         '__DEV__': false
       }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
-        }
-      }),
-      new webpack.optimize.DedupePlugin()
     ]
   });
 }
