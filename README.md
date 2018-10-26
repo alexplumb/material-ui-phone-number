@@ -1,4 +1,4 @@
-# material-ui-phone-input
+# material-ui-phone-number
 Highly customizable phone input component with auto formatting. Based on the wonderful <a href="https://github.com/bl00mber/react-phone-input-2">react-phone-input-2</a> package.
 
 ![alt tag](https://media.giphy.com/media/l378A8qFNzgiuPUre/giphy.gif)
@@ -6,7 +6,7 @@ Highly customizable phone input component with auto formatting. Based on the won
 ## Installation
 
 ```shell-script
-npm install material-ui-phone-input --save
+npm install material-ui-phone-number --save
 ```
 
 ## Usage

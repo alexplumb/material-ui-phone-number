@@ -89,7 +89,7 @@ if (TARGET === 'build') {
   module.exports = merge(common, {
     mode: 'production',
     entry: {
-      'material-ui-phone-input': path.resolve(ROOT_PATH, 'src/index.js')
+      'material-ui-phone-number': path.resolve(ROOT_PATH, 'src/index.js')
     },
     output: {
       path: path.resolve(ROOT_PATH, 'dist'),
