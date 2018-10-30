@@ -23,7 +23,7 @@ const styles = () => ({
   }
 });
 
-class MaterialReactPhoneInput extends React.Component {
+class MaterialUiPhoneNumber extends React.Component {
   static propTypes = {
     excludeCountries: PropTypes.arrayOf(PropTypes.string),
     onlyCountries: PropTypes.arrayOf(PropTypes.string),
@@ -793,8 +793,6 @@ class MaterialReactPhoneInput extends React.Component {
   }
 }
 
-const PhoneInput = withStyles(styles)(MaterialReactPhoneInput);
-
-export default PhoneInput;
+export default withStyles(styles)(MaterialUiPhoneNumber);
 
 if (__DEV__) require('./demo.js');
