@@ -716,13 +716,13 @@ class MaterialUiPhoneNumber extends React.Component {
         label={label}
         error={!this.checkIfValid()}
         helperText={helperText}
+        onChange={this.handleInput}
+        onClick={this.handleInputClick}
+        onFocus={this.handleInputFocus}
+        onBlur={this.handleInputBlur}
+        onKeyDown={this.handleInputKeyDown}
         type="tel"
         InputProps={{
-          onChange: this.handleInput,
-          onClick: this.handleInputClick,
-          onFocus: this.handleInputFocus,
-          onBlur: this.handleInputBlur,
-          onKeyDown: this.handleInputKeyDown,
           startAdornment: (
             <InputAdornment
               className={classes.positionStart}
