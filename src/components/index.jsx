@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  TextField, InputAdornment, Button, Menu, Divider,
+  TextField, InputAdornment, Button, Menu, Divider, RootRef,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import {
@@ -127,6 +127,8 @@ class MaterialUiPhoneNumber extends React.Component {
       SPACE: 32,
     },
   }
+
+  flags = {};
 
   guessSelectedCountry = memoize((inputNumber, onlyCountries, defaultCountry) => {
     const secondBestGuess = find(onlyCountries, { iso2: defaultCountry }) || {};
@@ -280,42 +282,15 @@ class MaterialUiPhoneNumber extends React.Component {
   }
 
   // View methods
-  scrollTo = (country, middle) => {
+  scrollTo = (country) => {
     if (!country) { return; }
 
-    const container = this.dropdownRef;
+    let container = this.dropdownContainerRef;
 
     if (!container || !document.body) { return; }
 
-    const containerHeight = container.offsetHeight;
-    const containerOffset = container.getBoundingClientRect();
-    const containerTop = containerOffset.top + document.body.scrollTop;
-    const containerBottom = containerTop + containerHeight;
-
-    const element = country;
-    const elementOffset = element.getBoundingClientRect();
-
-    const elementHeight = element.offsetHeight;
-    const elementTop = elementOffset.top + document.body.scrollTop;
-    const elementBottom = elementTop + elementHeight;
-
-    let newScrollTop = elementTop - containerTop + container.scrollTop;
-    const middleOffset = (containerHeight / 2) - (elementHeight / 2);
-
-    if (elementTop < containerTop) {
-      // scroll up
-      if (middle) {
-        newScrollTop -= middleOffset;
-      }
-      container.scrollTop = newScrollTop;
-    } else if (elementBottom > containerBottom) {
-      // scroll down
-      if (middle) {
-        newScrollTop += middleOffset;
-      }
-      const heightDifference = containerHeight - elementHeight;
-      container.scrollTop = newScrollTop - heightDifference;
-    }
+    container = container.querySelector('[role="document"]');
+    container.scrollTop = country.offsetTop;
   }
 
   formatNumber = (text, patternArg) => {
@@ -385,13 +360,14 @@ class MaterialUiPhoneNumber extends React.Component {
     }
   }
 
-  getElement = index => this[`flag_no_${index}`]
+  getElement = index => this.flags[`flag_no_${index}`]
 
   // return country data from state
   getCountryData = () => {
     const { selectedCountry } = this.state;
 
     if (!selectedCountry) return {};
+
     return {
       name: selectedCountry.name || '',
       dialCode: selectedCountry.dialCode || '',
@@ -401,15 +377,19 @@ class MaterialUiPhoneNumber extends React.Component {
 
   handleFlagDropdownClick = () => {
     const {
-      anchorEl, selectedCountry, preferredCountries, highlightCountryIndex, onlyCountries,
+      anchorEl, selectedCountry, preferredCountries, onlyCountries,
     } = this.state;
     const { disabled } = this.props;
 
     if (!anchorEl && disabled) return;
 
+    const highlightCountryIndex = preferredCountries.includes(selectedCountry)
+      ? findIndex(preferredCountries, selectedCountry)
+      : findIndex(onlyCountries, selectedCountry);
+
     if (preferredCountries.includes(selectedCountry)) {
       this.setState({
-        highlightCountryIndex: findIndex(preferredCountries, selectedCountry),
+        highlightCountryIndex,
       }, () => {
         if (anchorEl) {
           this.scrollTo(this.getElement(highlightCountryIndex));
@@ -417,7 +397,7 @@ class MaterialUiPhoneNumber extends React.Component {
       });
     } else {
       this.setState({
-        highlightCountryIndex: findIndex(onlyCountries, selectedCountry),
+        highlightCountryIndex,
       }, () => {
         if (anchorEl) {
           this.scrollTo(this.getElement(highlightCountryIndex + preferredCountries.length));
@@ -747,55 +727,65 @@ class MaterialUiPhoneNumber extends React.Component {
             <InputAdornment
               className={classes.positionStart}
               position="start"
-              ref={(el) => {
-                this.dropdownContainerRef = el;
-              }}
             >
               <Button
                 className={classes.flagButton}
                 aria-owns={anchorEl ? 'country-menu' : null}
                 aria-label="Select country"
-                onClick={(e) => {
-                  this.setState({ anchorEl: e.currentTarget });
-                  this.handleFlagDropdownClick();
-                }}
+                onClick={e => this.setState({ anchorEl: e.currentTarget })}
                 aria-haspopup
               >
                 <div className={inputFlagClasses} />
               </Button>
 
-              <Menu
-                className={dropdownClass}
-                id="country-menu"
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={() => this.setState({ anchorEl: null })}
+              <RootRef
+                rootRef={(el) => {
+                  this.dropdownContainerRef = el;
+                }}
               >
-                {!!preferredCountries.length && (
-                  <>
-                    {map(preferredCountries, (country, index) => (
-                      <Item
-                        key={`preferred_${country.iso2}_${index}`}
-                        name={country.name}
-                        iso2={country.iso2}
-                        dialCode={country.dialCode}
-                        localization={localization && localization[country.name]}
-                      />
-                    ))}
-                    <Divider />
-                  </>
-                )}
+                <Menu
+                  className={dropdownClass}
+                  id="country-menu"
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={() => this.setState({ anchorEl: null })}
+                  onEnter={this.handleFlagDropdownClick}
+                >
 
-                {map(onlyCountries, (country, index) => (
-                  <Item
-                    key={`preferred_${country.iso2}_${index}`}
-                    name={country.name}
-                    iso2={country.iso2}
-                    dialCode={country.dialCode}
-                    localization={localization && localization[country.name]}
-                  />
-                ))}
-              </Menu>
+                  {!!preferredCountries.length && (
+                    <>
+                      {map(preferredCountries, (country, index) => (
+                        <Item
+                          key={`preferred_${country.iso2}_${index}`}
+                          itemRef={(node) => {
+                            this.flags[`flag_no_${index}`] = node;
+                          }}
+                          onClick={() => this.handleFlagItemClick(country)}
+                          name={country.name}
+                          iso2={country.iso2}
+                          dialCode={country.dialCode}
+                          localization={localization && localization[country.name]}
+                        />
+                      ))}
+                      <Divider />
+                    </>
+                  )}
+
+                  {map(onlyCountries, (country, index) => (
+                    <Item
+                      key={`preferred_${country.iso2}_${index}`}
+                      itemRef={(node) => {
+                        this.flags[`flag_no_${index}`] = node;
+                      }}
+                      onClick={() => this.handleFlagItemClick(country)}
+                      name={country.name}
+                      iso2={country.iso2}
+                      dialCode={country.dialCode}
+                      localization={localization && localization[country.name]}
+                    />
+                  ))}
+                </Menu>
+              </RootRef>
             </InputAdornment>
           ),
         }}

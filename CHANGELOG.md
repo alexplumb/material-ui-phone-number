@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed an issue with dropdowns not popping over the flag button
 - Fixed an issue with the divider not appearing in the dropdown
+- Fixed a regression with the dropdown not scrolling to the selected country
 ### Added
 ### Changed
 ### Security
