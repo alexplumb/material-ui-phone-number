@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  TextField, InputAdornment, Menu, MenuItem, Button,
+  TextField, InputAdornment, MenuItem, Button, Menu,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import {
@@ -110,9 +110,7 @@ class MaterialUiPhoneNumber extends React.Component {
 
     onEnterKeyPress: () => {},
 
-    isModernBrowser: document.createElement ? (
-      Boolean(document.createElement('input').setSelectionRange)
-    ) : false,
+    isModernBrowser: () => (document.createElement ? Boolean(document.createElement('input').setSelectionRange) : false),
 
     keys: {
       UP: 38,
@@ -681,9 +679,9 @@ class MaterialUiPhoneNumber extends React.Component {
 
   getCountryDropdownList = () => {
     const {
-      preferredCountries, onlyCountries, highlightCountryIndex, anchorEl, selectedCountry,
+      preferredCountries, onlyCountries, highlightCountryIndex, selectedCountry,
     } = this.state;
-    const { localization, dropdownClass } = this.props;
+    const { localization } = this.props;
 
     const countryIsPreferred = preferredCountries.includes(selectedCountry);
 
@@ -728,24 +726,7 @@ class MaterialUiPhoneNumber extends React.Component {
       countryDropdownList.splice(preferredCountries.length, 0, dashedLi);
     }
 
-    const dropDownClasses = classNames({
-      [dropdownClass]: true,
-      'country-list': true,
-    });
-
-    return (
-      <Menu
-        id="country-menu"
-        ref={(el) => {
-          this.dropdownRef = el;
-        }}
-        className={dropDownClasses}
-        open={Boolean(anchorEl)}
-        onClose={() => { this.setState({ anchorEl: null }); }}
-      >
-        {countryDropdownList}
-      </Menu>
-    );
+    return countryDropdownList;
   }
 
   updateFormattedNumber(number) {
@@ -776,11 +757,11 @@ class MaterialUiPhoneNumber extends React.Component {
 
   render() {
     const {
-      selectedCountry, formattedNumber, anchorEl, placeholder,
+      selectedCountry, formattedNumber, placeholder, anchorEl,
     } = this.state;
     const {
       classes, inputClass, isValid, required, disabled, autoFocus,
-      name, label,
+      name, label, dropdownClass,
     } = this.props;
 
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
@@ -815,11 +796,11 @@ class MaterialUiPhoneNumber extends React.Component {
                 className={classes.flagButton}
                 aria-owns={anchorEl ? 'country-menu' : null}
                 aria-label="Select country"
-                onClick={(event) => {
-                  this.setState({ anchorEl: event.currentTarget });
-                  this.handleFlagDropdownClick(event);
+                onClick={(e) => {
+                  this.setState({ anchorEl: e.currentTarget });
+                  this.handleFlagDropdownClick();
                 }}
-                ref={(el) => {
+                buttonRef={(el) => {
                   this.dropdownContainerRef = el;
                 }}
                 aria-haspopup
@@ -827,7 +808,15 @@ class MaterialUiPhoneNumber extends React.Component {
                 <div className={inputFlagClasses} />
               </Button>
 
-              {this.getCountryDropdownList()}
+              <Menu
+                className={dropdownClass}
+                id="country-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={() => this.setState({ anchorEl: null })}
+              >
+                {this.getCountryDropdownList()}
+              </Menu>
             </InputAdornment>
           ),
         }}
