@@ -20,7 +20,7 @@ export default render(
       }
     `}} />
     <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
-      <p>v1.0.4</p>
+      <p>v1.1.0</p>
       <p>Exclude countries (usa, canada)</p>
       <MaterialUiPhoneNumber
         defaultCountry='no'

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  TextField, InputAdornment, MenuItem, Button, Menu,
+  TextField, InputAdornment, Button, Menu, Divider,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import {
@@ -10,9 +10,9 @@ import {
 import { findIndex, head, tail } from 'lodash/array';
 import { debounce, memoize } from 'lodash/function';
 import { trim, startsWith } from 'lodash/string';
-import classNames from 'classnames';
 import { document } from '../global';
 import countryData from '../country_data';
+import Item from './Item';
 import '../styles.less';
 import '../flags.png';
 
@@ -49,6 +49,7 @@ class MaterialUiPhoneNumber extends React.Component {
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     autoFocus: PropTypes.bool,
+    helperText: PropTypes.string,
 
     inputClass: PropTypes.string,
     dropdownClass: PropTypes.string,
@@ -93,6 +94,7 @@ class MaterialUiPhoneNumber extends React.Component {
     disabled: false,
     autoFocus: false,
     label: null,
+    helperText: null,
 
     inputClass: '',
     dropdownClass: '',
@@ -677,59 +679,14 @@ class MaterialUiPhoneNumber extends React.Component {
     }
   }
 
-  getCountryDropdownList = () => {
-    const {
-      preferredCountries, onlyCountries, highlightCountryIndex, selectedCountry,
-    } = this.state;
-    const { localization } = this.props;
+  checkIfValid = () => {
+    const { formattedNumber } = this.state;
+    const { isValid } = this.props;
 
-    const countryIsPreferred = preferredCountries.includes(selectedCountry);
+    return isValid(formattedNumber.replace(/\D/g, ''));
+  };
 
-    const countryDropdownList = map(preferredCountries.concat(onlyCountries), (country, index) => {
-      const itemClasses = classNames({
-        country: true,
-        preferred: country.iso2 === 'us' || country.iso2 === 'gb',
-        active: country.iso2 === 'us',
-        highlight: countryIsPreferred ? highlightCountryIndex === index : highlightCountryIndex === index - preferredCountries.length,
-      });
-
-      const inputFlagClasses = `flag ${country.iso2} margin`;
-
-      return (
-        <MenuItem
-          ref={(el) => {
-            this[`flag_no_${index}`] = el;
-          }}
-          key={`flag_no_${index}`}
-          data-flag-key={`flag_no_${index}`}
-          className={itemClasses}
-          data-dial-code="1"
-          data-country-code={country.iso2}
-          onClick={() => this.handleFlagItemClick(country)}
-        >
-          <div className={inputFlagClasses} />
-          <span className="country-name">
-            {
-              localization[country.name] !== undefined
-                ? localization[country.name] : country.name
-          }
-
-          </span>
-          <span className="dial-code">{`+${country.dialCode}`}</span>
-        </MenuItem>
-      );
-    });
-
-    const dashedLi = (<li key="dashes" className="divider" />);
-    // let's insert a dashed line in between preffered countries and the rest
-    if (preferredCountries.length > 0) {
-      countryDropdownList.splice(preferredCountries.length, 0, dashedLi);
-    }
-
-    return countryDropdownList;
-  }
-
-  updateFormattedNumber(number) {
+  updateFormattedNumber = (number) => {
     const { onlyCountries, defaultCountry } = this.state;
     const { disableCountryCode } = this.props;
 
@@ -753,15 +710,15 @@ class MaterialUiPhoneNumber extends React.Component {
     }
 
     this.setState({ selectedCountry: countryGuess, formattedNumber });
-  }
+  };
 
   render() {
     const {
-      selectedCountry, formattedNumber, placeholder, anchorEl,
+      selectedCountry, formattedNumber, placeholder, anchorEl, preferredCountries, onlyCountries,
     } = this.state;
     const {
-      classes, inputClass, isValid, required, disabled, autoFocus,
-      name, label, dropdownClass,
+      classes, inputClass, helperText, required, disabled, autoFocus,
+      name, label, dropdownClass, localization,
     } = this.props;
 
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
@@ -769,11 +726,6 @@ class MaterialUiPhoneNumber extends React.Component {
     return (
       <TextField
         placeholder={placeholder}
-        onChange={this.handleInput}
-        onClick={this.handleInputClick}
-        onFocus={this.handleInputFocus}
-        onBlur={this.handleInputBlur}
-        onKeyDown={this.handleInputKeyDown}
         value={formattedNumber}
         className={inputClass}
         required={required}
@@ -782,8 +734,15 @@ class MaterialUiPhoneNumber extends React.Component {
         inputRef={this.handleRefInput}
         name={name}
         label={label}
-        error={!isValid(formattedNumber.replace(/\D/g, ''))}
+        error={!this.checkIfValid()}
+        helperText={helperText}
+        type="tel"
         InputProps={{
+          onChange: this.handleInput,
+          onClick: this.handleInputClick,
+          onFocus: this.handleInputFocus,
+          onBlur: this.handleInputBlur,
+          onKeyDown: this.handleInputKeyDown,
           startAdornment: (
             <InputAdornment
               className={classes.positionStart}
@@ -800,9 +759,6 @@ class MaterialUiPhoneNumber extends React.Component {
                   this.setState({ anchorEl: e.currentTarget });
                   this.handleFlagDropdownClick();
                 }}
-                buttonRef={(el) => {
-                  this.dropdownContainerRef = el;
-                }}
                 aria-haspopup
               >
                 <div className={inputFlagClasses} />
@@ -815,12 +771,34 @@ class MaterialUiPhoneNumber extends React.Component {
                 open={Boolean(anchorEl)}
                 onClose={() => this.setState({ anchorEl: null })}
               >
-                {this.getCountryDropdownList()}
+                {!!preferredCountries.length && (
+                  <>
+                    {map(preferredCountries, (country, index) => (
+                      <Item
+                        key={`preferred_${country.iso2}_${index}`}
+                        name={country.name}
+                        iso2={country.iso2}
+                        dialCode={country.dialCode}
+                        localization={localization && localization[country.name]}
+                      />
+                    ))}
+                    <Divider />
+                  </>
+                )}
+
+                {map(onlyCountries, (country, index) => (
+                  <Item
+                    key={`preferred_${country.iso2}_${index}`}
+                    name={country.name}
+                    iso2={country.iso2}
+                    dialCode={country.dialCode}
+                    localization={localization && localization[country.name]}
+                  />
+                ))}
               </Menu>
             </InputAdornment>
           ),
         }}
-        type="tel"
       />
     );
   }
