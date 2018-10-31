@@ -10,22 +10,22 @@ const ROOT_PATH = path.resolve(__dirname);
 module.exports = merge(common, {
   mode: 'production',
   entry: {
-    'material-ui-phone-number': path.resolve(ROOT_PATH, 'src/index.js')
+    'material-ui-phone-number': path.resolve(ROOT_PATH, 'src/index.js'),
   },
   output: {
     path: path.resolve(ROOT_PATH, 'dist'),
     filename: 'index.js',
     library: 'MaterialUiPhoneNumber',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
   },
   externals: [{
-    'lodash': 'lodash',
-    'react': {
+    lodash: 'lodash',
+    react: {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
-      amd: 'react'
-    }
+      amd: 'react',
+    },
   }],
   optimization: {
     minimizer: [
@@ -59,9 +59,9 @@ module.exports = merge(common, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
+        NODE_ENV: JSON.stringify('production'),
       },
-      '__DEV__': false
+      __DEV__: false,
     }),
-  ]
+  ],
 });

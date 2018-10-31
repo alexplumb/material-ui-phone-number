@@ -10,7 +10,6 @@ import {
 import { findIndex, head, tail } from 'lodash/array';
 import { debounce, memoize } from 'lodash/function';
 import { trim, startsWith } from 'lodash/string';
-import { document } from '../global';
 import countryData from '../country_data';
 import Item from './Item';
 import '../styles.less';
@@ -481,7 +480,7 @@ class MaterialUiPhoneNumber extends React.Component {
       }
 
       if (onChange) {
-        onChange(oldFormattedText, this.getCountryData());
+        onChange(formattedNumber, this.getCountryData());
       }
     });
   }

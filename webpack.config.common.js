@@ -1,7 +1,8 @@
 const path = require('path');
+
 const ROOT_PATH = path.resolve(__dirname);
 
-//Common configuration settings
+// Common configuration settings
 module.exports = {
   entry: path.resolve(ROOT_PATH, 'src/index.js'),
   resolve: {
@@ -10,7 +11,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(ROOT_PATH, 'dist'),
-    filename: 'index.js'
+    filename: 'index.js',
   },
   module: {
     rules: [
@@ -35,7 +36,7 @@ module.exports = {
       {
         test: /\.png.*$/,
         use: 'url-loader?limit=100000&mimetype=image/png',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.less$/,
@@ -44,7 +45,7 @@ module.exports = {
           { loader: 'css-loader' },
           { loader: 'less-loader' },
         ],
-      }
-    ]
-  }
+      },
+    ],
+  },
 };

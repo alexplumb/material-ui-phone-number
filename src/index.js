@@ -2,4 +2,5 @@ import MaterialUiPhoneNumber from './components/index';
 
 export default MaterialUiPhoneNumber;
 
-if (__DEV__) require('./demo.js');
+/* eslint-disable */
+if (__DEV__) require('./demo.jsx');
