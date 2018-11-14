@@ -101,6 +101,13 @@ Custom regions selected:
         defaultCountry="ca"
         regions={['north-america', 'carribean']}
       />
+      <p>Disabled dropdown</p>
+      <MaterialUiPhoneNumber
+        onlyCountries={['us']}
+        defaultCountry='us'
+        disableDropdown={true}
+        placeholder='(702) 123-4567'
+      />
       <p>Disabled dropdown and country code</p>
       <MaterialUiPhoneNumber
         onlyCountries={['us']}

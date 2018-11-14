@@ -16,11 +16,6 @@ import '../styles.less';
 import '../flags.png';
 
 const styles = () => ({
-  flag: {
-    height: 16,
-    width: 11,
-    background: 'url("./flags.png")',
-  },
   flagButton: {
     minWidth: 30,
     padding: 0,
@@ -58,6 +53,7 @@ class MaterialUiPhoneNumber extends React.Component {
     autoFormat: PropTypes.bool,
     disableAreaCodes: PropTypes.bool,
     disableCountryCode: PropTypes.bool,
+    disableDropdown: PropTypes.bool,
     enableLongNumbers: PropTypes.bool,
     countryCodeEditable: PropTypes.bool,
 
@@ -102,6 +98,7 @@ class MaterialUiPhoneNumber extends React.Component {
     disableAreaCodes: false,
     isValid: inputNumber => some(countryData.allCountries, country => startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber)),
     disableCountryCode: false,
+    disableDropdown: false,
     enableLongNumbers: false,
     countryCodeEditable: true,
 
@@ -697,10 +694,80 @@ class MaterialUiPhoneNumber extends React.Component {
     } = this.state;
     const {
       classes, inputClass, helperText, required, disabled, autoFocus,
-      name, label, dropdownClass, localization,
+      name, label, dropdownClass, localization, disableDropdown,
     } = this.props;
 
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
+
+    const inputProps = disableDropdown ? {} : {
+      InputProps: {
+        startAdornment: (
+          <InputAdornment
+            className={classes.positionStart}
+            position="start"
+          >
+            <Button
+              className={classes.flagButton}
+              aria-owns={anchorEl ? 'country-menu' : null}
+              aria-label="Select country"
+              onClick={e => this.setState({ anchorEl: e.currentTarget })}
+              aria-haspopup
+            >
+              <div className={inputFlagClasses} />
+            </Button>
+
+            <RootRef
+              rootRef={(el) => {
+                this.dropdownContainerRef = el;
+              }}
+            >
+              <Menu
+                className={dropdownClass}
+                id="country-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={() => this.setState({ anchorEl: null })}
+                onEnter={this.handleFlagDropdownClick}
+              >
+
+                {!!preferredCountries.length && (
+                  <>
+                    {map(preferredCountries, (country, index) => (
+                      <Item
+                        key={`preferred_${country.iso2}_${index}`}
+                        itemRef={(node) => {
+                          this.flags[`flag_no_${index}`] = node;
+                        }}
+                        onClick={() => this.handleFlagItemClick(country)}
+                        name={country.name}
+                        iso2={country.iso2}
+                        dialCode={country.dialCode}
+                        localization={localization && localization[country.name]}
+                      />
+                    ))}
+                    <Divider />
+                  </>
+                )}
+
+                {map(onlyCountries, (country, index) => (
+                  <Item
+                    key={`preferred_${country.iso2}_${index}`}
+                    itemRef={(node) => {
+                      this.flags[`flag_no_${index}`] = node;
+                    }}
+                    onClick={() => this.handleFlagItemClick(country)}
+                    name={country.name}
+                    iso2={country.iso2}
+                    dialCode={country.dialCode}
+                    localization={localization && localization[country.name]}
+                  />
+                ))}
+              </Menu>
+            </RootRef>
+          </InputAdornment>
+        ),
+      },
+    };
 
     return (
       <TextField
@@ -721,73 +788,7 @@ class MaterialUiPhoneNumber extends React.Component {
         onBlur={this.handleInputBlur}
         onKeyDown={this.handleInputKeyDown}
         type="tel"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment
-              className={classes.positionStart}
-              position="start"
-            >
-              <Button
-                className={classes.flagButton}
-                aria-owns={anchorEl ? 'country-menu' : null}
-                aria-label="Select country"
-                onClick={e => this.setState({ anchorEl: e.currentTarget })}
-                aria-haspopup
-              >
-                <div className={inputFlagClasses} />
-              </Button>
-
-              <RootRef
-                rootRef={(el) => {
-                  this.dropdownContainerRef = el;
-                }}
-              >
-                <Menu
-                  className={dropdownClass}
-                  id="country-menu"
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={() => this.setState({ anchorEl: null })}
-                  onEnter={this.handleFlagDropdownClick}
-                >
-
-                  {!!preferredCountries.length && (
-                    <>
-                      {map(preferredCountries, (country, index) => (
-                        <Item
-                          key={`preferred_${country.iso2}_${index}`}
-                          itemRef={(node) => {
-                            this.flags[`flag_no_${index}`] = node;
-                          }}
-                          onClick={() => this.handleFlagItemClick(country)}
-                          name={country.name}
-                          iso2={country.iso2}
-                          dialCode={country.dialCode}
-                          localization={localization && localization[country.name]}
-                        />
-                      ))}
-                      <Divider />
-                    </>
-                  )}
-
-                  {map(onlyCountries, (country, index) => (
-                    <Item
-                      key={`preferred_${country.iso2}_${index}`}
-                      itemRef={(node) => {
-                        this.flags[`flag_no_${index}`] = node;
-                      }}
-                      onClick={() => this.handleFlagItemClick(country)}
-                      name={country.name}
-                      iso2={country.iso2}
-                      dialCode={country.dialCode}
-                      localization={localization && localization[country.name]}
-                    />
-                  ))}
-                </Menu>
-              </RootRef>
-            </InputAdornment>
-          ),
-        }}
+        {...inputProps}
       />
     );
   }
