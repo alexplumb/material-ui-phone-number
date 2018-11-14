@@ -694,79 +694,77 @@ class MaterialUiPhoneNumber extends React.Component {
     } = this.state;
     const {
       classes, inputClass, helperText, required, disabled, autoFocus,
-      name, label, dropdownClass, localization, disableDropdown,
+      name, label, dropdownClass, localization, disableDropdown, inputProps,
     } = this.props;
 
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
 
-    const inputProps = disableDropdown ? {} : {
-      InputProps: {
-        startAdornment: (
-          <InputAdornment
-            className={classes.positionStart}
-            position="start"
+    const dropdownProps = disableDropdown ? {} : {
+      startAdornment: (
+        <InputAdornment
+          className={classes.positionStart}
+          position="start"
+        >
+          <Button
+            className={classes.flagButton}
+            aria-owns={anchorEl ? 'country-menu' : null}
+            aria-label="Select country"
+            onClick={e => this.setState({ anchorEl: e.currentTarget })}
+            aria-haspopup
           >
-            <Button
-              className={classes.flagButton}
-              aria-owns={anchorEl ? 'country-menu' : null}
-              aria-label="Select country"
-              onClick={e => this.setState({ anchorEl: e.currentTarget })}
-              aria-haspopup
+            <div className={inputFlagClasses} />
+          </Button>
+
+          <RootRef
+            rootRef={(el) => {
+              this.dropdownContainerRef = el;
+            }}
+          >
+            <Menu
+              className={dropdownClass}
+              id="country-menu"
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={() => this.setState({ anchorEl: null })}
+              onEnter={this.handleFlagDropdownClick}
             >
-              <div className={inputFlagClasses} />
-            </Button>
 
-            <RootRef
-              rootRef={(el) => {
-                this.dropdownContainerRef = el;
-              }}
-            >
-              <Menu
-                className={dropdownClass}
-                id="country-menu"
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={() => this.setState({ anchorEl: null })}
-                onEnter={this.handleFlagDropdownClick}
-              >
+              {!!preferredCountries.length && (
+                <>
+                  {map(preferredCountries, (country, index) => (
+                    <Item
+                      key={`preferred_${country.iso2}_${index}`}
+                      itemRef={(node) => {
+                        this.flags[`flag_no_${index}`] = node;
+                      }}
+                      onClick={() => this.handleFlagItemClick(country)}
+                      name={country.name}
+                      iso2={country.iso2}
+                      dialCode={country.dialCode}
+                      localization={localization && localization[country.name]}
+                    />
+                  ))}
+                  <Divider />
+                </>
+              )}
 
-                {!!preferredCountries.length && (
-                  <>
-                    {map(preferredCountries, (country, index) => (
-                      <Item
-                        key={`preferred_${country.iso2}_${index}`}
-                        itemRef={(node) => {
-                          this.flags[`flag_no_${index}`] = node;
-                        }}
-                        onClick={() => this.handleFlagItemClick(country)}
-                        name={country.name}
-                        iso2={country.iso2}
-                        dialCode={country.dialCode}
-                        localization={localization && localization[country.name]}
-                      />
-                    ))}
-                    <Divider />
-                  </>
-                )}
-
-                {map(onlyCountries, (country, index) => (
-                  <Item
-                    key={`preferred_${country.iso2}_${index}`}
-                    itemRef={(node) => {
-                      this.flags[`flag_no_${index}`] = node;
-                    }}
-                    onClick={() => this.handleFlagItemClick(country)}
-                    name={country.name}
-                    iso2={country.iso2}
-                    dialCode={country.dialCode}
-                    localization={localization && localization[country.name]}
-                  />
-                ))}
-              </Menu>
-            </RootRef>
-          </InputAdornment>
-        ),
-      },
+              {map(onlyCountries, (country, index) => (
+                <Item
+                  key={`preferred_${country.iso2}_${index}`}
+                  itemRef={(node) => {
+                    this.flags[`flag_no_${index}`] = node;
+                  }}
+                  onClick={() => this.handleFlagItemClick(country)}
+                  name={country.name}
+                  iso2={country.iso2}
+                  dialCode={country.dialCode}
+                  localization={localization && localization[country.name]}
+                />
+              ))}
+            </Menu>
+          </RootRef>
+        </InputAdornment>
+      ),
     };
 
     return (
@@ -788,7 +786,10 @@ class MaterialUiPhoneNumber extends React.Component {
         onBlur={this.handleInputBlur}
         onKeyDown={this.handleInputKeyDown}
         type="tel"
-        {...inputProps}
+        InputProps={{
+          ...dropdownProps,
+          ...inputProps,
+        }}
       />
     );
   }
