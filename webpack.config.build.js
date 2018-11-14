@@ -26,6 +26,12 @@ module.exports = merge(common, {
       commonjs: 'react',
       amd: 'react',
     },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom',
+    },
   }],
   optimization: {
     minimizer: [
