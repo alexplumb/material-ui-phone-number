@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.3] - 2018-12-07
+### Fixed
+- Fixed a React warning caused by having the first child of a menu being a React.Fragment
+### Changed
+- Added @material-ui/core to webpack externals and removed lodash from externals
+
 ## [1.2.1] - 2018-11-14
 ### Added
 - Added support for `inputProps` TextField parameter

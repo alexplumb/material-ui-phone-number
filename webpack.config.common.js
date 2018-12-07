@@ -29,6 +29,7 @@ module.exports = {
               ['@babel/plugin-proposal-class-properties', { loose: false }],
               '@babel/plugin-proposal-object-rest-spread',
               'react-hot-loader/babel',
+              'lodash',
             ],
           },
         },

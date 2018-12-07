@@ -1,6 +1,6 @@
 {
   "name": "material-ui-phone-number",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A material-ui react component to format phone numbers. Based on react-phone-input-2",
   "main": "dist/index.js",
   "scripts": {
@@ -32,6 +32,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
+    "babel-plugin-lodash": "^3.3.4",
     "css-loader": "^1.0.1",
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.1.0",
