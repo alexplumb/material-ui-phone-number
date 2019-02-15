@@ -1,7 +1,11 @@
 # material-ui-phone-number
-Highly customizable phone input component with auto formatting. Based on the wonderful <a href="https://github.com/bl00mber/react-phone-input-2">react-phone-input-2</a> package.
+Highly customizable phone input component with auto formatting. Based on the wonderful [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2) package.
+
+It looks like this, but in Material Design:
 
 ![alt tag](https://media.giphy.com/media/l378A8qFNzgiuPUre/giphy.gif)
+
+Uses @material-ui/core/TextField for rendering the phone input
 
 ## Installation
 
@@ -13,7 +17,7 @@ npm install material-ui-phone-number --save
 
 ```jsx
 React.render(
-  <ReactPhoneInput defaultCountry={'us'} onChange={handleOnChange}/>,
+  <MuiPhoneNumber defaultCountry={'us'} onChange={handleOnChange}/>,
   document.getElementById('root')
 );
 ```
@@ -30,7 +34,6 @@ function handleOnChange(value) {
 ```
 
 ## Options
-
 <table>
   <tr>
     <th> Name </th>
@@ -71,7 +74,12 @@ function handleOnChange(value) {
   <tr>
     <td> placeholder </td>
     <td> string </td>
-    <td colspan="2"> custom placeholder </td>
+    <td colspan="2"> placeholder for the TextField input </td>
+  </tr>
+  <tr>
+    <td> label </td>
+    <td> string | element</td>
+    <td colspan="2"> label for the TextField </td>
   </tr>
   <tr>
     <td> name </td>
@@ -94,30 +102,9 @@ function handleOnChange(value) {
     <td colspan="2"> autoFocus input </td>
   </tr>
   <tr>
-    <td> containerStyle </td>
-    <td> object </td>
-    <td colspan="2"> styles for container </td>
-  </tr>
-  <tr>
-    <td> inputStyle </td>
-    <td> object </td>
-    <td colspan="2"> styles for input </td>
-  </tr>
-  <tr>
-    <td> buttonStyle </td>
-    <td> object </td>
-    <td colspan="2"> styles for dropdown button </td>
-  </tr>
-  <tr>
-    <td> dropdownStyle </td>
-    <td> object </td>
-    <td colspan="2"> styles for dropdown container </td>
-  </tr>
-
-  <tr>
-    <td> containerClass </td>
+    <td> helperText </td>
     <td> string </td>
-    <td colspan="2"> class for container </td>
+    <td colspan="2"> TextField helper text </td>
   </tr>
   <tr>
     <td> inputClass </td>
@@ -125,14 +112,19 @@ function handleOnChange(value) {
     <td colspan="2"> class for input </td>
   </tr>
   <tr>
-    <td> buttonClass </td>
-    <td> string </td>
-    <td colspan="2"> class for dropdown button </td>
-  </tr>
-  <tr>
     <td> dropdownClass </td>
     <td> string </td>
     <td colspan="2"> class for dropdown container </td>
+  </tr>
+  <tr>
+    <td> inputProps </td>
+    <td> object </td>
+    <td colspan="2"> props that get spread to TextField InputProps </td>
+  </tr>
+  <tr>
+    <td> inputRef </td>
+    <td> function </td>
+    <td colspan="2"> callback for getting the input reference </td>
   </tr>
 
   <tr>
@@ -199,7 +191,7 @@ function handleOnChange(value) {
 
 Regions selected: {'europe'}
 ```jsx
-<ReactPhoneInput
+<MuiPhoneInput
   defaultCountry='it'
   regions={'europe'}
 />
@@ -207,7 +199,7 @@ Regions selected: {'europe'}
 
 Regions selected: {['north-america', 'carribean']}
 ```jsx
-<ReactPhoneInput
+<MuiPhoneInput
   defaultCountry='ca'
   regions={['north-america', 'carribean']}
 />
@@ -227,7 +219,7 @@ Regions selected: {['north-america', 'carribean']}
 </table>
 
 ```jsx
-<ReactPhoneInput
+<MuiPhoneInput
   onlyCountries=['de', 'es']
   localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
 />
@@ -266,5 +258,7 @@ Country data object not returns from onKeyDown event
 </table>
 
 ## License
+
+Based on [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2)
 
 Based on [react-phone-input](https://github.com/razagill/react-phone-input) using [MIT](https://opensource.org/licenses/MIT)
