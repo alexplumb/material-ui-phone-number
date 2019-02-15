@@ -67,46 +67,6 @@ function handleOnChange(value) {
   </tr>
 
   <tr>
-    <td> value </td>
-    <td> string </td>
-    <td colspan="2"> input state value </td>
-  </tr>
-  <tr>
-    <td> placeholder </td>
-    <td> string </td>
-    <td colspan="2"> placeholder for the TextField input </td>
-  </tr>
-  <tr>
-    <td> label </td>
-    <td> string | element</td>
-    <td colspan="2"> label for the TextField </td>
-  </tr>
-  <tr>
-    <td> name </td>
-    <td> string </td>
-    <td colspan="2"> input name </td>
-  </tr>
-  <tr>
-    <td> required </td>
-    <td> bool </td>
-    <td colspan="2"> false by default </td>
-  </tr>
-  <tr>
-    <td> disabled </td>
-    <td> bool </td>
-    <td colspan="2"> disable input and dropdown </td>
-  </tr>
-  <tr>
-    <td> autoFocus </td>
-    <td> bool </td>
-    <td colspan="2"> autoFocus input </td>
-  </tr>
-  <tr>
-    <td> helperText </td>
-    <td> string </td>
-    <td colspan="2"> TextField helper text </td>
-  </tr>
-  <tr>
     <td> inputClass </td>
     <td> string </td>
     <td colspan="2"> class for input </td>
@@ -115,16 +75,6 @@ function handleOnChange(value) {
     <td> dropdownClass </td>
     <td> string </td>
     <td colspan="2"> class for dropdown container </td>
-  </tr>
-  <tr>
-    <td> inputProps </td>
-    <td> object </td>
-    <td colspan="2"> props that get spread to TextField InputProps </td>
-  </tr>
-  <tr>
-    <td> inputRef </td>
-    <td> function </td>
-    <td colspan="2"> callback for getting the input reference </td>
   </tr>
 
   <tr>
@@ -156,6 +106,68 @@ function handleOnChange(value) {
     <td> countryCodeEditable </td>
     <td> bool </td>
     <td colspan="2"> true by default </td>
+  </tr>
+
+  <tr>
+    <td colspan="4"><b>Supported TextField props</b></td>
+  </tr>
+
+  <tr>
+    <td> value </td>
+    <td> string </td>
+    <td colspan="2"> input state value </td>
+  </tr>
+  <tr>
+    <td> placeholder </td>
+    <td> string </td>
+    <td colspan="2"> placeholder for the TextField input </td>
+  </tr>
+  <tr>
+    <td> label </td>
+    <td> string | element</td>
+    <td colspan="2"> label for the TextField </td>
+  </tr>
+  <tr>
+    <td> name </td>
+    <td> string </td>
+    <td colspan="2"> input name </td>
+  </tr>
+  <tr>
+    <td> required </td>
+    <td> bool </td>
+    <td colspan="2"> false by default </td>
+  </tr>
+  <tr>
+    <td> disabled </td>
+    <td> bool </td>
+    <td colspan="2"> disable input and dropdown </td>
+  </tr>
+    <tr>
+    <td> helperText </td>
+    <td> string </td>
+    <td colspan="2"> TextField helper text </td>
+  </tr>
+    <tr>
+    <td> inputProps </td>
+    <td> object </td>
+    <td colspan="2"> props that get spread to TextField InputProps </td>
+  </tr>
+  <tr>
+    <td> inputRef </td>
+    <td> function </td>
+    <td colspan="2"> callback for getting the input reference </td>
+  </tr>
+
+  <tr>
+    <td> autoFocus </td>
+    <td> bool </td>
+    <td colspan="2"> autoFocus input </td>
+  </tr>
+
+  <tr>
+    <td> error </td>
+    <td> boolean </td>
+    <td colspan="2"> TextField error state </td>
   </tr>
 </table>
 

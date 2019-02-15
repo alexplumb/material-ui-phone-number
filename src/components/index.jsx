@@ -44,6 +44,7 @@ class MaterialUiPhoneNumber extends React.Component {
     disabled: PropTypes.bool,
     autoFocus: PropTypes.bool,
     helperText: PropTypes.string,
+    error: PropTypes.bool,
 
     inputClass: PropTypes.string,
     dropdownClass: PropTypes.string,
@@ -90,6 +91,7 @@ class MaterialUiPhoneNumber extends React.Component {
     autoFocus: false,
     label: null,
     helperText: null,
+    error: false,
 
     inputClass: '',
     dropdownClass: '',
@@ -693,7 +695,7 @@ class MaterialUiPhoneNumber extends React.Component {
       selectedCountry, formattedNumber, placeholder, anchorEl, preferredCountries, onlyCountries,
     } = this.state;
     const {
-      classes, inputClass, helperText, required, disabled, autoFocus,
+      classes, inputClass, helperText, required, disabled, autoFocus, error,
       name, label, dropdownClass, localization, disableDropdown, inputProps,
     } = this.props;
 
@@ -774,7 +776,7 @@ class MaterialUiPhoneNumber extends React.Component {
         inputRef={this.handleRefInput}
         name={name}
         label={label}
-        error={!this.checkIfValid()}
+        error={error || !this.checkIfValid()}
         helperText={helperText}
         onChange={this.handleInput}
         onClick={this.handleInputClick}
