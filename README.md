@@ -169,6 +169,12 @@ function handleOnChange(value) {
     <td> boolean </td>
     <td colspan="2"> TextField error state </td>
   </tr>
+
+  <tr>
+    <td> variant </td>
+    <td> string </td>
+    <td colspan="2"> 'standard' by default </td>
+  </tr>
 </table>
 
 ### Regions
