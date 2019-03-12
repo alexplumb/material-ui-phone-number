@@ -45,6 +45,7 @@ class MaterialUiPhoneNumber extends React.Component {
     autoFocus: PropTypes.bool,
     helperText: PropTypes.string,
     error: PropTypes.bool,
+    variant: PropTypes.bool,
 
     inputClass: PropTypes.string,
     dropdownClass: PropTypes.string,
@@ -92,6 +93,7 @@ class MaterialUiPhoneNumber extends React.Component {
     label: null,
     helperText: null,
     error: false,
+    variant: 'standard',
 
     inputClass: '',
     dropdownClass: '',
@@ -108,7 +110,7 @@ class MaterialUiPhoneNumber extends React.Component {
 
     localization: {},
 
-    onEnterKeyPress: () => {},
+    onEnterKeyPress: () => { },
 
     isModernBrowser: () => (document.createElement ? Boolean(document.createElement('input').setSelectionRange) : false),
 
@@ -330,9 +332,9 @@ class MaterialUiPhoneNumber extends React.Component {
         remainingText: tail(acc.remainingText),
       };
     }, {
-      formattedText: '',
-      remainingText: text.split(''),
-    });
+        formattedText: '',
+        remainingText: text.split(''),
+      });
 
     let formattedNumber;
     if (enableLongNumbers) {
@@ -697,6 +699,7 @@ class MaterialUiPhoneNumber extends React.Component {
     const {
       classes, inputClass, helperText, required, disabled, autoFocus, error,
       name, label, dropdownClass, localization, disableDropdown, inputProps,
+      variant
     } = this.props;
 
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
@@ -767,6 +770,7 @@ class MaterialUiPhoneNumber extends React.Component {
 
     return (
       <TextField
+        variant={variant}
         placeholder={placeholder}
         value={formattedNumber}
         className={inputClass}
