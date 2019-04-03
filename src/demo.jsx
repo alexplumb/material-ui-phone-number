@@ -21,9 +21,8 @@ class ChangeDemo extends React.Component {
         <MaterialUiPhoneNumber
           defaultCountry="it"
           preferredCountries={['it', 'se']}
-          onChange={(value) => {
-            console.log(value);
-            this.setState({ number: value });
+          onChange={(e) => {
+            this.setState({ number: e });
           }}
         />
       </div>
@@ -31,28 +30,8 @@ class ChangeDemo extends React.Component {
   }
 }
 
-/* eslint-disable */
 export default render(
   <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px' }}>
-    <style
-      dangerouslySetInnerHTML={{
-        __html: `
-            input[type="tel"].custom-phone-input {
-              font-size: 14px;
-              border-color: #a0a0a0;
-            }
-
-            .custom-phone-button {
-              background: rgb(200, 215, 225) !important;
-              border-color: #a0a0a0 !important;
-            }
-
-            .custom-dropdown {
-              margin-top: 0 !important;
-            }
-          `,
-      }}
-    />
     <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
       <p>v1.1.0</p>
       <p>Exclude countries (usa, canada)</p>
@@ -115,7 +94,7 @@ export default render(
     }}
     >
       <p>
-Custom region selected:
+        Custom region selected:
         {' '}
         {'{\'europe\'}'}
       </p>
@@ -124,7 +103,7 @@ Custom region selected:
         regions="europe"
       />
       <p>
-Custom regions selected:
+        Custom regions selected:
         {' '}
         {'{[\'north-america\', \'carribean\']}'}
       </p>
@@ -135,9 +114,9 @@ Custom regions selected:
       <p>Disabled dropdown</p>
       <MaterialUiPhoneNumber
         onlyCountries={['us']}
-        defaultCountry='us'
-        disableDropdown={true}
-        placeholder='(702) 123-4567'
+        defaultCountry="us"
+        disableDropdown
+        placeholder="(702) 123-4567"
       />
       <p>Disabled dropdown and country code</p>
       <MaterialUiPhoneNumber

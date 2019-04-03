@@ -85,7 +85,6 @@ class MaterialUiPhoneNumber extends React.Component {
     preferredCountries: [],
     defaultCountry: '',
 
-    value: '',
     placeholder: '+1 (702) 123-4567',
     name: '',
     required: false,
@@ -220,7 +219,8 @@ class MaterialUiPhoneNumber extends React.Component {
     if (nextProps.defaultCountry && nextProps.defaultCountry !== defaultCountry) {
       this.updateDefaultCountry(nextProps.defaultCountry);
     }
-    if (nextProps.value !== formattedNumber) {
+
+    if (typeof nextProps.value === 'string' && nextProps.value !== formattedNumber) {
       this.updateFormattedNumber(nextProps.value);
     }
   }
@@ -277,6 +277,7 @@ class MaterialUiPhoneNumber extends React.Component {
     const { disableCountryCode } = this.props;
 
     const newSelectedCountry = find(onlyCountries, { iso2: country });
+
     this.setState({
       defaultCountry: country,
       selectedCountry: newSelectedCountry,
@@ -699,6 +700,7 @@ class MaterialUiPhoneNumber extends React.Component {
     const {
       selectedCountry, formattedNumber, placeholder, anchorEl, preferredCountries, onlyCountries,
     } = this.state;
+
     const {
       classes, inputClass, helperText, required, disabled, autoFocus, error,
       name, label, dropdownClass, localization, disableDropdown, inputProps,
