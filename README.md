@@ -175,6 +175,12 @@ function handleOnChange(value) {
     <td> string </td>
     <td colspan="2"> 'standard' by default </td>
   </tr>
+
+  <tr>
+    <td> fullWidth </td>
+    <td> boolean </td>
+    <td colspan="2"> TextField property - false by default </td>
+  </tr>
 </table>
 
 ### Regions
