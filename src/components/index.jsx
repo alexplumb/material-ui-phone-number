@@ -24,6 +24,7 @@ const styles = () => ({
     position: 'relative',
   },
 });
+
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
 /* eslint-disable max-len */
@@ -37,15 +38,10 @@ class MaterialUiPhoneNumber extends React.Component {
     defaultCountry: PropTypes.string,
 
     value: PropTypes.string,
-    placeholder: PropTypes.string,
     name: PropTypes.string,
-    label: PropTypes.string,
-    required: PropTypes.bool,
-    disabled: PropTypes.bool,
     autoFocus: PropTypes.bool,
-    helperText: PropTypes.string,
     error: PropTypes.bool,
-    variant: PropTypes.bool,
+    placeholder: PropTypes.string,
 
     inputClass: PropTypes.string,
     dropdownClass: PropTypes.string,
@@ -87,13 +83,8 @@ class MaterialUiPhoneNumber extends React.Component {
     value: '',
     placeholder: '+1 (702) 123-4567',
     name: '',
-    required: false,
-    disabled: false,
     autoFocus: false,
-    label: null,
-    helperText: null,
     error: false,
-    variant: 'standard',
 
     inputClass: '',
     dropdownClass: '',
@@ -111,6 +102,7 @@ class MaterialUiPhoneNumber extends React.Component {
     localization: {},
 
     onEnterKeyPress: () => { },
+    onChange: () => {},
 
     isModernBrowser: () => (document.createElement ? Boolean(document.createElement('input').setSelectionRange) : false),
 
@@ -332,9 +324,9 @@ class MaterialUiPhoneNumber extends React.Component {
         remainingText: tail(acc.remainingText),
       };
     }, {
-        formattedText: '',
-        remainingText: text.split(''),
-      });
+      formattedText: '',
+      remainingText: text.split(''),
+    });
 
     let formattedNumber;
     if (enableLongNumbers) {
@@ -697,9 +689,7 @@ class MaterialUiPhoneNumber extends React.Component {
       selectedCountry, formattedNumber, placeholder, anchorEl, preferredCountries, onlyCountries,
     } = this.state;
     const {
-      classes, inputClass, helperText, required, disabled, autoFocus, error,
-      name, label, dropdownClass, localization, disableDropdown, inputProps,
-      variant
+      classes, inputClass, autoFocus, error, dropdownClass, localization, disableDropdown, inputProps, ...restProps
     } = this.props;
 
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
@@ -770,18 +760,13 @@ class MaterialUiPhoneNumber extends React.Component {
 
     return (
       <TextField
-        variant={variant}
-        placeholder={placeholder}
+        {...restProps}
         value={formattedNumber}
         className={inputClass}
-        required={required}
-        disabled={disabled}
         autoFocus={autoFocus}
         inputRef={this.handleRefInput}
-        name={name}
-        label={label}
+        placeholder={placeholder}
         error={error || !this.checkIfValid()}
-        helperText={helperText}
         onChange={this.handleInput}
         onClick={this.handleInputClick}
         onFocus={this.handleInputFocus}

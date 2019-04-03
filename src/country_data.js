@@ -70,6 +70,7 @@ const rawAllCountries = [
     ['america', 'south-america'],
     'ar',
     '54',
+    '+.. (..) ........',
   ],
   [
     'Armenia',
@@ -131,6 +132,7 @@ const rawAllCountries = [
     ['europe', 'ex-ussr'],
     'by',
     '375',
+    '+... (..) ... .. ..',
   ],
   [
     'Belgium',
@@ -357,6 +359,7 @@ const rawAllCountries = [
     ['europe', 'european-union'],
     'cy',
     '357',
+    '+... .. ......',
   ],
   [
     'Czech Republic',
@@ -427,6 +430,7 @@ const rawAllCountries = [
     ['europe', 'european-union', 'ex-ussr'],
     'ee',
     '372',
+    '+... .... ......',
   ],
   [
     'Ethiopia',
@@ -501,7 +505,7 @@ const rawAllCountries = [
     ['europe', 'european-union'],
     'de',
     '49',
-    '+.. ... .........',
+    '+.. .... ........',
   ],
   [
     'Ghana',
@@ -642,6 +646,7 @@ const rawAllCountries = [
     ['middle-east'],
     'il',
     '972',
+    '+... ... ... ....',
   ],
   [
     'Italy',
@@ -662,7 +667,7 @@ const rawAllCountries = [
     ['asia'],
     'jp',
     '81',
-    '+.. ... .. ....',
+    '+.. .. .... ....',
   ],
   [
     'Jordan',
@@ -676,7 +681,7 @@ const rawAllCountries = [
     'kz',
     '7',
     '+. ... ...-..-..',
-    1,
+    1, ['313', '327', '7172', '312', '73622', '321', '324', '336', '318', '315', '325', '311', '326', '310'],
   ],
   [
     'Kenya',
@@ -846,6 +851,7 @@ const rawAllCountries = [
     ['europe'],
     'md',
     '373',
+    '+... (..) ..-..-..',
   ],
   [
     'Monaco',
@@ -1030,7 +1036,7 @@ const rawAllCountries = [
     ['asia'],
     'ph',
     '63',
-    '+.. ... ....',
+    '+.. .... .......',
   ],
   [
     'Poland',
@@ -1227,6 +1233,7 @@ const rawAllCountries = [
     ['asia'],
     'kr',
     '82',
+    '+.. ... .... ....',
   ],
   [
     'South Sudan',
@@ -1270,7 +1277,7 @@ const rawAllCountries = [
     ['europe', 'european-union'],
     'se',
     '46',
-    '+.. .. ... .. ..',
+    '+.. (...) ...-...',
   ],
   [
     'Switzerland',
@@ -1384,9 +1391,10 @@ const rawAllCountries = [
   ],
   [
     'Ukraine',
-    ['europe'],
+    ['europe', 'ex-ussr'],
     'ua',
     '380',
+    '+... (..) ... .. ..',
   ],
   [
     'United Arab Emirates',
@@ -1417,7 +1425,7 @@ const rawAllCountries = [
   ],
   [
     'Uzbekistan',
-    ['asia'],
+    ['asia', 'ex-ussr'],
     'uz',
     '998',
   ],

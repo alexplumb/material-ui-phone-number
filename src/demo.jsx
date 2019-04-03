@@ -2,6 +2,35 @@ import React from 'react';
 import { render } from 'react-dom';
 import MaterialUiPhoneNumber from './index';
 
+class ChangeDemo extends React.Component {
+  state = {
+    number: '',
+  };
+
+  render() {
+    const { number } = this.state;
+
+    return (
+      <div>
+        Current number:
+        {' '}
+        {number}
+
+        <br />
+
+        <MaterialUiPhoneNumber
+          defaultCountry="it"
+          preferredCountries={['it', 'se']}
+          onChange={(value) => {
+            console.log(value);
+            this.setState({ number: value });
+          }}
+        />
+      </div>
+    );
+  }
+}
+
 /* eslint-disable */
 export default render(
   <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px' }}>
@@ -41,6 +70,8 @@ export default render(
         defaultCountry="it"
         preferredCountries={['it', 'se']}
       />
+      <p>onChange</p>
+      <ChangeDemo />
     </div>
 
     <div style={{ display: 'inline-block', marginLeft: '40px' }}>
@@ -116,16 +147,6 @@ Custom regions selected:
         disableCountryCode
         disableDropdown
         placeholder="(702) 123-4567"
-      />
-      <p>Localization</p>
-      <p>Non-editable country code</p>
-      <p>Autofocus</p>
-      <MaterialUiPhoneNumber
-        defaultCountry="de"
-        onlyCountries={['de', 'es']}
-        localization={{ Germany: 'Deutschland', Spain: 'España' }}
-        countryCodeEditable={false}
-        autoFocus
       />
     </div>
   </div>, document.getElementById('root'),
