@@ -24,7 +24,6 @@ const styles = () => ({
     position: 'relative',
   },
 });
-
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
 /* eslint-disable max-len */
@@ -38,10 +37,16 @@ class MaterialUiPhoneNumber extends React.Component {
     defaultCountry: PropTypes.string,
 
     value: PropTypes.string,
-    name: PropTypes.string,
-    autoFocus: PropTypes.bool,
-    error: PropTypes.bool,
     placeholder: PropTypes.string,
+    name: PropTypes.string,
+    label: PropTypes.string,
+    required: PropTypes.bool,
+    disabled: PropTypes.bool,
+    autoFocus: PropTypes.bool,
+    helperText: PropTypes.string,
+    error: PropTypes.bool,
+    variant: PropTypes.string,
+    fullWidth: PropTypes.bool,
 
     inputClass: PropTypes.string,
     dropdownClass: PropTypes.string,
@@ -83,8 +88,14 @@ class MaterialUiPhoneNumber extends React.Component {
     value: '',
     placeholder: '+1 (702) 123-4567',
     name: '',
+    required: false,
+    disabled: false,
     autoFocus: false,
+    label: null,
+    helperText: null,
     error: false,
+    variant: 'standard',
+    fullWidth: false,
 
     inputClass: '',
     dropdownClass: '',
@@ -689,7 +700,9 @@ class MaterialUiPhoneNumber extends React.Component {
       selectedCountry, formattedNumber, placeholder, anchorEl, preferredCountries, onlyCountries,
     } = this.state;
     const {
-      classes, inputClass, autoFocus, error, dropdownClass, localization, disableDropdown, inputProps, ...restProps
+      classes, inputClass, helperText, required, disabled, autoFocus, error,
+      name, label, dropdownClass, localization, disableDropdown, inputProps,
+      variant, fullWidth,
     } = this.props;
 
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
@@ -760,13 +773,18 @@ class MaterialUiPhoneNumber extends React.Component {
 
     return (
       <TextField
-        {...restProps}
+        variant={variant}
+        placeholder={placeholder}
         value={formattedNumber}
         className={inputClass}
+        required={required}
+        disabled={disabled}
         autoFocus={autoFocus}
         inputRef={this.handleRefInput}
-        placeholder={placeholder}
+        name={name}
+        label={label}
         error={error || !this.checkIfValid()}
+        helperText={helperText}
         onChange={this.handleInput}
         onClick={this.handleInputClick}
         onFocus={this.handleInputFocus}
@@ -777,6 +795,7 @@ class MaterialUiPhoneNumber extends React.Component {
           ...dropdownProps,
           ...inputProps,
         }}
+        fullWidth={fullWidth}
       />
     );
   }
