@@ -1,29 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {
-  TextField, InputAdornment, Button, Menu, Divider, RootRef,
+  TextField, InputAdornment, Button, Menu, Divider, RootRef, NativeSelect,
 } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/styles/withStyles';
 import {
   some, find, reduce, map, filter, includes,
 } from 'lodash/collection';
 import { findIndex, head, tail } from 'lodash/array';
 import { debounce, memoize } from 'lodash/function';
 import { trim, startsWith } from 'lodash/string';
+import { isString } from 'lodash/lang';
 import countryData from '../country_data';
 import Item from './Item';
 import '../styles.less';
 import '../flags.png';
 
-const styles = () => ({
+const styles = theme => ({
   flagButton: {
     minWidth: 30,
     padding: 0,
+    height: 30,
+  },
+  native: {
+    width: 30,
+    height: 30,
+    padding: 8,
+
+    '&:before,&:after': {
+      display: 'none',
+    },
+  },
+  nativeRoot: {
+    padding: 0,
+
+    '& > svg': {
+      display: 'none',
+    },
+  },
+  nativeSelect: {
+    padding: 0,
+    lineHeight: 0,
+    margin: theme.spacing(1) * -1,
+    height: `calc(100% + ${theme.spacing(2)}px)`,
+    width: `calc(100% + ${theme.spacing(2)}px)`,
   },
   positionStart: {
     position: 'relative',
   },
 });
+
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
 /* eslint-disable max-len */
@@ -47,6 +74,7 @@ class MaterialUiPhoneNumber extends React.Component {
     error: PropTypes.bool,
     variant: PropTypes.string,
     fullWidth: PropTypes.bool,
+    native: PropTypes.bool,
 
     inputClass: PropTypes.string,
     dropdownClass: PropTypes.string,
@@ -95,6 +123,7 @@ class MaterialUiPhoneNumber extends React.Component {
     error: false,
     variant: 'standard',
     fullWidth: false,
+    native: false,
 
     inputClass: '',
     dropdownClass: '',
@@ -129,6 +158,8 @@ class MaterialUiPhoneNumber extends React.Component {
       SPACE: 32,
     },
   }
+
+  static displayName = 'MuiPhoneNumber'
 
   flags = {};
 
@@ -524,7 +555,7 @@ class MaterialUiPhoneNumber extends React.Component {
     const { onChange } = this.props;
 
     const currentSelectedCountry = selectedCountry;
-    const nextSelectedCountry = find(onlyCountries, country);
+    const nextSelectedCountry = isString(country) ? find(onlyCountries, countryItem => countryItem.iso2 === country) : find(onlyCountries, country);
 
     const unformattedNumber = formattedNumber.replace(' ', '').replace('(', '').replace(')', '').replace('-', '');
     const newNumber = unformattedNumber.length > 1 ? unformattedNumber.replace(currentSelectedCountry.dialCode, nextSelectedCountry.dialCode) : nextSelectedCountry.dialCode;
@@ -696,15 +727,13 @@ class MaterialUiPhoneNumber extends React.Component {
     this.setState({ selectedCountry: countryGuess, formattedNumber });
   };
 
-  render() {
+  getDropdownProps = () => {
     const {
-      selectedCountry, formattedNumber, placeholder, anchorEl, preferredCountries, onlyCountries,
+      selectedCountry, anchorEl, preferredCountries, onlyCountries,
     } = this.state;
 
     const {
-      classes, inputClass, helperText, required, disabled, autoFocus, error,
-      name, label, dropdownClass, localization, disableDropdown, inputProps,
-      variant, fullWidth,
+      classes, dropdownClass, localization, disableDropdown, native,
     } = this.props;
 
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
@@ -715,63 +744,125 @@ class MaterialUiPhoneNumber extends React.Component {
           className={classes.positionStart}
           position="start"
         >
-          <Button
-            className={classes.flagButton}
-            aria-owns={anchorEl ? 'country-menu' : null}
-            aria-label="Select country"
-            onClick={e => this.setState({ anchorEl: e.currentTarget })}
-            aria-haspopup
-          >
-            <div className={inputFlagClasses} />
-          </Button>
+          {native ? (
+            <>
+              <NativeSelect
+                id="country-menu"
+                open={Boolean(anchorEl)}
+                onClose={() => this.setState({ anchorEl: null })}
+                className={classes.native}
+                classes={{
+                  root: classNames(classes.nativeRoot, 'native', inputFlagClasses),
+                  select: classes.nativeSelect,
+                }}
+                onChange={e => this.handleFlagItemClick(e.target.value)}
+              >
+                {!!preferredCountries.length && map(preferredCountries, (country, index) => (
+                  <Item
+                    key={`preferred_${country.iso2}_${index}`}
+                    itemRef={(node) => {
+                      this.flags[`flag_no_${index}`] = node;
+                    }}
+                    name={country.name}
+                    iso2={country.iso2}
+                    dialCode={country.dialCode}
+                    localization={localization && localization[country.name]}
+                    native
+                  />
+                ))}
 
-          <RootRef
-            rootRef={(el) => {
-              this.dropdownContainerRef = el;
-            }}
-          >
-            <Menu
-              className={dropdownClass}
-              id="country-menu"
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={() => this.setState({ anchorEl: null })}
-              onEnter={this.handleFlagDropdownClick}
-            >
-              {!!preferredCountries.length && map(preferredCountries, (country, index) => (
-                <Item
-                  key={`preferred_${country.iso2}_${index}`}
-                  itemRef={(node) => {
-                    this.flags[`flag_no_${index}`] = node;
-                  }}
-                  onClick={() => this.handleFlagItemClick(country)}
-                  name={country.name}
-                  iso2={country.iso2}
-                  dialCode={country.dialCode}
-                  localization={localization && localization[country.name]}
-                />
-              ))}
+                {map(onlyCountries, (country, index) => (
+                  <Item
+                    key={`preferred_${country.iso2}_${index}`}
+                    itemRef={(node) => {
+                      this.flags[`flag_no_${index}`] = node;
+                    }}
+                    name={country.name}
+                    iso2={country.iso2}
+                    dialCode={country.dialCode}
+                    localization={localization && localization[country.name]}
+                    native
+                  />
+                ))}
+              </NativeSelect>
+            </>
+          ) : (
+            <>
+              <Button
+                className={classes.flagButton}
+                aria-owns={anchorEl ? 'country-menu' : null}
+                aria-label="Select country"
+                onClick={e => this.setState({ anchorEl: e.currentTarget })}
+                aria-haspopup
+              >
+                <div className={inputFlagClasses} />
+              </Button>
 
-              {!!preferredCountries.length && <Divider />}
+              <RootRef
+                rootRef={(el) => {
+                  this.dropdownContainerRef = el;
+                }}
+              >
+                <Menu
+                  className={dropdownClass}
+                  id="country-menu"
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={() => this.setState({ anchorEl: null })}
+                  onEnter={this.handleFlagDropdownClick}
+                >
+                  {!!preferredCountries.length && map(preferredCountries, (country, index) => (
+                    <Item
+                      key={`preferred_${country.iso2}_${index}`}
+                      itemRef={(node) => {
+                        this.flags[`flag_no_${index}`] = node;
+                      }}
+                      onClick={() => this.handleFlagItemClick(country)}
+                      name={country.name}
+                      iso2={country.iso2}
+                      dialCode={country.dialCode}
+                      localization={localization && localization[country.name]}
+                    />
+                  ))}
 
-              {map(onlyCountries, (country, index) => (
-                <Item
-                  key={`preferred_${country.iso2}_${index}`}
-                  itemRef={(node) => {
-                    this.flags[`flag_no_${index}`] = node;
-                  }}
-                  onClick={() => this.handleFlagItemClick(country)}
-                  name={country.name}
-                  iso2={country.iso2}
-                  dialCode={country.dialCode}
-                  localization={localization && localization[country.name]}
-                />
-              ))}
-            </Menu>
-          </RootRef>
+                  {!!preferredCountries.length && <Divider />}
+
+                  {map(onlyCountries, (country, index) => (
+                    <Item
+                      key={`preferred_${country.iso2}_${index}`}
+                      itemRef={(node) => {
+                        this.flags[`flag_no_${index}`] = node;
+                      }}
+                      onClick={() => this.handleFlagItemClick(country)}
+                      name={country.name}
+                      iso2={country.iso2}
+                      dialCode={country.dialCode}
+                      localization={localization && localization[country.name]}
+                    />
+                  ))}
+                </Menu>
+              </RootRef>
+            </>
+          )}
         </InputAdornment>
       ),
     };
+
+    return dropdownProps;
+  };
+
+  render() {
+    const {
+      formattedNumber, placeholder,
+    } = this.state;
+
+    const {
+      inputClass, helperText, required, disabled, autoFocus, error,
+      name, label, inputProps,
+      variant, fullWidth,
+    } = this.props;
+
+    const dropdownProps = this.getDropdownProps();
 
     return (
       <TextField

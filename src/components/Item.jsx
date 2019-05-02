@@ -9,16 +9,34 @@ export default class Item extends React.PureComponent {
     dialCode: PropTypes.string.isRequired,
     itemRef: PropTypes.func.isRequired,
     localization: PropTypes.string,
+    native: PropTypes.bool,
   };
 
   static defaultProps = {
     localization: null,
+    native: false,
   };
 
   render() {
     const {
-      name, iso2, dialCode, localization, itemRef, ...restProps
+      name, iso2, dialCode, localization, itemRef, native, ...restProps
     } = this.props;
+
+    if (native) {
+      return (
+        <option
+          className="country"
+          data-dial-code="1"
+          data-country-code={iso2}
+          value={iso2}
+          {...restProps}
+        >
+          {localization || name}
+          {' '}
+          {`+${dialCode}`}
+        </option>
+      );
+    }
 
     return (
       <RootRef rootRef={node => itemRef(node)}>
@@ -26,9 +44,6 @@ export default class Item extends React.PureComponent {
           className="country"
           data-dial-code="1"
           data-country-code={iso2}
-          onClick={() => this.handleFlagItemClick({
-            iso2, dialCode, name,
-          })}
           {...restProps}
         >
           <div className={`flag ${iso2} margin`} />
