@@ -1,6 +1,6 @@
 {
   "name": "material-ui-phone-number",
-  "version": "1.6.1",
+  "version": "2.0.0-beta0",
   "description": "A material-ui react component to format phone numbers. Based on react-phone-input-2",
   "main": "dist/index.js",
   "scripts": {
@@ -48,12 +48,12 @@
     "uglifyjs-webpack-plugin": "^2.1.2",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1",
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2"
   },
@@ -61,6 +61,7 @@
     "@material-ui/core": "^4.0.0-beta.0",
     "@material-ui/styles": "^4.0.0-beta.0",
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react-dom": ">=16.8.0",
+    "classnames": "^2.0.0"
   }
 }

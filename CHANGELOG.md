@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0-beta0] - 2019-05-02
+### Added
+- Added support for a new `native` property for people who want to use a native select for the button dropdown
+### Changed
+- Added support for material-ui 4
+- Added `classnames` to peer dependencies
+
 ## [1.6.0] - 2019-04-23
 ### Changed
 - Moved material-ui and react to peer dependencies

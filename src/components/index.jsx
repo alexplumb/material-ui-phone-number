@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  TextField, InputAdornment, Button, Menu, Divider, RootRef, NativeSelect,
-} from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import Divider from '@material-ui/core/Divider';
+import RootRef from '@material-ui/core/RootRef';
+import NativeSelect from '@material-ui/core/NativeSelect';
 import withStyles from '@material-ui/styles/withStyles';
 import {
-  some, find, reduce, map, filter, includes,
-} from 'lodash/collection';
-import { findIndex, head, tail } from 'lodash/array';
-import { debounce, memoize } from 'lodash/function';
-import { trim, startsWith } from 'lodash/string';
-import { isString } from 'lodash/lang';
+  some, find, reduce, map, filter, includes, findIndex,
+  head, tail, debounce, memoize, trim, startsWith, isString,
+} from 'lodash';
 import countryData from '../country_data';
 import Item from './Item';
 import '../styles.less';

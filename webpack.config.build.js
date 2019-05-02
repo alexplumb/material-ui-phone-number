@@ -35,6 +35,7 @@ module.exports = merge(common, {
     /@material-ui\/core\/*./,
     '@material-ui/styles',
     /@material-ui\/styles\/*./,
+    'classnames',
   ],
   plugins: [
     new webpack.DefinePlugin({

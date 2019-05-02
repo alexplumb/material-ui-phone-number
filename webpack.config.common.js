@@ -35,7 +35,7 @@ module.exports = {
       },
       {
         test: /\.png.*$/,
-        use: 'url-loader?limit=100000&mimetype=image/png',
+        use: ['url-loader?limit=100000&mimetype=image/png'],
         exclude: /node_modules/,
       },
       {
