@@ -14,6 +14,8 @@ module.exports = merge(common, {
     path: path.resolve(ROOT_PATH, 'dist'),
     filename: 'index.js',
     library: 'MaterialUiPhoneNumber',
+    umdNamedDefine: true,
+    globalObject: `(typeof self !== 'undefined' ? self : this)`, // eslint-disable-line
     libraryTarget: 'umd',
   },
   externals: [
@@ -29,6 +31,12 @@ module.exports = merge(common, {
         commonjs2: 'react-dom',
         commonjs: 'react-dom',
         amd: 'react-dom',
+      },
+      lodash: {
+        commonjs: 'lodash',
+        commonjs2: 'lodash',
+        amd: 'lodash',
+        root: '_',
       },
     },
     '@material-ui/core',

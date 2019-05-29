@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Added support for material-ui 4
 - Added `classnames` to peer dependencies
+- Added `lodash` to peer dependencies
 
 ## [1.6.0] - 2019-04-23
 ### Changed
