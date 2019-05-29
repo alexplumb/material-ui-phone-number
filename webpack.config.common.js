@@ -4,7 +4,9 @@ const ROOT_PATH = path.resolve(__dirname);
 
 // Common configuration settings
 module.exports = {
-  entry: path.resolve(ROOT_PATH, 'src/index.js'),
+  entry: {
+    'material-ui-phone-number': path.resolve(ROOT_PATH, 'src/index.js'),
+  },
   resolve: {
     extensions: ['.js', '.jsx'],
     modules: [path.resolve(__dirname, 'node_modules')],
@@ -12,6 +14,10 @@ module.exports = {
   output: {
     path: path.resolve(ROOT_PATH, 'dist'),
     filename: 'index.js',
+    library: 'MaterialUiPhoneNumber',
+    umdNamedDefine: true,
+    globalObject: `(typeof self !== 'undefined' ? self : this)`, // eslint-disable-line
+    libraryTarget: 'umd',
   },
   module: {
     rules: [
