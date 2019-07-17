@@ -18,7 +18,7 @@ import Item from './Item';
 import '../styles.less';
 import '../flags.png';
 
-const styles = theme => ({
+const styles = () => ({
   flagButton: {
     minWidth: 30,
     padding: 0,
@@ -28,24 +28,18 @@ const styles = theme => ({
     width: 30,
     height: 30,
     padding: 8,
-
-    '&:before,&:after': {
-      display: 'none',
-    },
   },
   nativeRoot: {
     padding: 0,
 
-    '& > svg': {
+    '& + svg': {
       display: 'none',
     },
   },
   nativeSelect: {
     padding: 0,
     lineHeight: 0,
-    margin: theme.spacing(1) * -1,
-    height: `calc(100% + ${theme.spacing(2)}px)`,
-    width: `calc(100% + ${theme.spacing(2)}px)`,
+    height: 11,
   },
   positionStart: {
     position: 'relative',
@@ -757,6 +751,7 @@ class MaterialUiPhoneNumber extends React.Component {
                   select: classes.nativeSelect,
                 }}
                 onChange={e => this.handleFlagItemClick(e.target.value)}
+                disableUnderline
               >
                 {!!preferredCountries.length && map(preferredCountries, (country, index) => (
                   <Item
