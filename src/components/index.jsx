@@ -8,7 +8,7 @@ import Menu from '@material-ui/core/Menu';
 import Divider from '@material-ui/core/Divider';
 import RootRef from '@material-ui/core/RootRef';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import withStyles from '@material-ui/styles/withStyles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import {
   some, find, reduce, map, filter, includes, findIndex,
   head, tail, debounce, memoize, trim, startsWith, isString,
@@ -855,7 +855,7 @@ class MaterialUiPhoneNumber extends React.Component {
 
     const {
       inputClass, helperText, required, disabled, autoFocus, error,
-      name, label, InputProps, inputProps, 
+      name, label, InputProps, inputProps,
       variant, fullWidth,
     } = this.props;
 
