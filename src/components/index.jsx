@@ -73,6 +73,7 @@ class MaterialUiPhoneNumber extends React.Component {
 
     inputClass: PropTypes.string,
     dropdownClass: PropTypes.string,
+    InputProps: PropTypes.object,
     inputProps: PropTypes.object,
     inputRef: PropTypes.func,
 
@@ -517,15 +518,15 @@ class MaterialUiPhoneNumber extends React.Component {
   }
 
   handleRefInput = (ref) => {
-    const { inputRef, inputProps } = this.props;
+    const { inputRef, InputProps } = this.props;
     this.inputRef = ref;
 
     let refProp;
 
     if (inputRef) {
       refProp = inputRef;
-    } else if (inputProps && inputProps.ref) {
-      refProp = inputProps.ref;
+    } else if (InputProps && InputProps.ref) {
+      refProp = InputProps.ref;
     }
 
     if (refProp) {
@@ -854,7 +855,7 @@ class MaterialUiPhoneNumber extends React.Component {
 
     const {
       inputClass, helperText, required, disabled, autoFocus, error,
-      name, label, inputProps,
+      name, label, InputProps, inputProps, 
       variant, fullWidth,
     } = this.props;
 
@@ -882,7 +883,10 @@ class MaterialUiPhoneNumber extends React.Component {
         type="tel"
         InputProps={{
           ...dropdownProps,
-          ...inputProps,
+          ...InputProps,
+        }}
+        inputProps={{
+          ...inputProps
         }}
         fullWidth={fullWidth}
       />
