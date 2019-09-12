@@ -171,6 +171,12 @@ function handleOnChange(value) {
   </tr>
 
   <tr>
+    <td> margin </td>
+    <td> 'none' | 'dense' | 'normal' </td>
+    <td colspan="2"> for adjusting vertical spacing of the TextField </td>
+  </tr>
+
+  <tr>
     <td> variant </td>
     <td> string </td>
     <td colspan="2"> 'standard' by default </td>

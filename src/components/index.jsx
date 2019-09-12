@@ -67,6 +67,7 @@ class MaterialUiPhoneNumber extends React.Component {
     autoFocus: PropTypes.bool,
     helperText: PropTypes.string,
     error: PropTypes.bool,
+    margin: PropTypes.oneOf(['none', 'dense', 'normal']),
     variant: PropTypes.string,
     fullWidth: PropTypes.bool,
     native: PropTypes.bool,
@@ -117,6 +118,7 @@ class MaterialUiPhoneNumber extends React.Component {
     label: null,
     helperText: null,
     error: false,
+    margin: 'none',
     variant: 'standard',
     fullWidth: false,
     native: false,
@@ -856,13 +858,14 @@ class MaterialUiPhoneNumber extends React.Component {
     const {
       inputClass, helperText, required, disabled, autoFocus, error,
       name, label, InputProps, inputProps,
-      variant, fullWidth,
+      margin, variant, fullWidth,
     } = this.props;
 
     const dropdownProps = this.getDropdownProps();
 
     return (
       <TextField
+        margin={margin}
         variant={variant}
         placeholder={placeholder}
         value={formattedNumber}
