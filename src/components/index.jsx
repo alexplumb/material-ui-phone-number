@@ -856,7 +856,7 @@ class MaterialUiPhoneNumber extends React.Component {
     const {
       inputClass, helperText, required, disabled, autoFocus, error,
       name, label, InputProps, inputProps,
-      variant, fullWidth,
+      variant, fullWidth, margin,
     } = this.props;
 
     const dropdownProps = this.getDropdownProps();
@@ -889,6 +889,7 @@ class MaterialUiPhoneNumber extends React.Component {
           ...inputProps
         }}
         fullWidth={fullWidth}
+        margin={margin}
       />
     );
   }
