@@ -130,7 +130,7 @@ class MaterialUiPhoneNumber extends React.Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate({ value: prevValue }) {
     const { defaultCountry: prevDefaultCountry, formattedNumber } = this.state;
     const { defaultCountry, value } = this.props;
 
@@ -138,7 +138,7 @@ class MaterialUiPhoneNumber extends React.Component {
       this.updateDefaultCountry(defaultCountry);
     }
 
-    if (typeof value === 'string' && value !== formattedNumber) {
+    if (typeof value === 'string' && value !== prevValue && value !== formattedNumber) {
       this.updateFormattedNumber(value);
     }
   }
@@ -750,6 +750,7 @@ class MaterialUiPhoneNumber extends React.Component {
       dropdownClass, autoFormat, disableAreaCodes, isValid, disableCountryCode,
       disableDropdown, enableLongNumbers, countryCodeEditable, onEnterKeyPress,
       isModernBrowser, classes, keys, localization, placeholder, regions, onChange,
+      value,
       // end placeholder props
       inputClass, error, InputProps,
       ...restProps
