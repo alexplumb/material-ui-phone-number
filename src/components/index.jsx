@@ -130,7 +130,7 @@ class MaterialUiPhoneNumber extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) { // eslint-disable-line
     const { defaultCountry, formattedNumber } = this.state;
 
     if (nextProps.defaultCountry && nextProps.defaultCountry !== defaultCountry) {
