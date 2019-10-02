@@ -113,73 +113,7 @@ function handleOnChange(value) {
   </tr>
 
   <tr>
-    <td> value </td>
-    <td> string </td>
-    <td colspan="2"> input state value </td>
-  </tr>
-  <tr>
-    <td> placeholder </td>
-    <td> string </td>
-    <td colspan="2"> placeholder for the TextField input </td>
-  </tr>
-  <tr>
-    <td> label </td>
-    <td> string | element</td>
-    <td colspan="2"> label for the TextField </td>
-  </tr>
-  <tr>
-    <td> name </td>
-    <td> string </td>
-    <td colspan="2"> input name </td>
-  </tr>
-  <tr>
-    <td> required </td>
-    <td> bool </td>
-    <td colspan="2"> false by default </td>
-  </tr>
-  <tr>
-    <td> disabled </td>
-    <td> bool </td>
-    <td colspan="2"> disable input and dropdown </td>
-  </tr>
-    <tr>
-    <td> helperText </td>
-    <td> string </td>
-    <td colspan="2"> TextField helper text </td>
-  </tr>
-    <tr>
-    <td> inputProps </td>
-    <td> object </td>
-    <td colspan="2"> props that get spread to TextField InputProps </td>
-  </tr>
-  <tr>
-    <td> inputRef </td>
-    <td> function </td>
-    <td colspan="2"> callback for getting the input reference </td>
-  </tr>
-
-  <tr>
-    <td> autoFocus </td>
-    <td> bool </td>
-    <td colspan="2"> autoFocus input </td>
-  </tr>
-
-  <tr>
-    <td> error </td>
-    <td> boolean </td>
-    <td colspan="2"> TextField error state </td>
-  </tr>
-
-  <tr>
-    <td> variant </td>
-    <td> string </td>
-    <td colspan="2"> 'standard' by default </td>
-  </tr>
-
-  <tr>
-    <td> fullWidth </td>
-    <td> boolean </td>
-    <td colspan="2"> TextField property - false by default </td>
+    <td colspan="4">See TextField API for possible values https://material-ui.com/api/text-field/</td>
   </tr>
 </table>
 

@@ -130,15 +130,16 @@ class MaterialUiPhoneNumber extends React.Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) { // eslint-disable-line
-    const { defaultCountry, formattedNumber } = this.state;
+  componentDidUpdate() {
+    const { defaultCountry: prevDefaultCountry, formattedNumber } = this.state;
+    const { defaultCountry, value } = this.props;
 
-    if (nextProps.defaultCountry && nextProps.defaultCountry !== defaultCountry) {
-      this.updateDefaultCountry(nextProps.defaultCountry);
+    if (defaultCountry && defaultCountry !== prevDefaultCountry) {
+      this.updateDefaultCountry(defaultCountry);
     }
 
-    if (typeof nextProps.value === 'string' && nextProps.value !== formattedNumber) {
-      this.updateFormattedNumber(nextProps.value);
+    if (typeof value === 'string' && value !== formattedNumber) {
+      this.updateFormattedNumber(value);
     }
   }
 
@@ -740,31 +741,29 @@ class MaterialUiPhoneNumber extends React.Component {
 
   render() {
     const {
-      formattedNumber, placeholder,
+      formattedNumber, placeholder: statePlaceholder,
     } = this.state;
 
     const {
-      inputClass, helperText, required, disabled, autoFocus, error,
-      name, label, InputProps,
-      variant, fullWidth, ...restProps
+      // start placeholder props
+      native, defaultCountry, excludeCountries, onlyCountries, preferredCountries,
+      dropdownClass, autoFormat, disableAreaCodes, isValid, disableCountryCode,
+      disableDropdown, enableLongNumbers, countryCodeEditable, onEnterKeyPress,
+      isModernBrowser, classes, keys, localization, placeholder, regions, onChange,
+      // end placeholder props
+      inputClass, error, InputProps,
+      ...restProps
     } = this.props;
 
     const dropdownProps = this.getDropdownProps();
 
     return (
       <TextField
-        variant={variant}
-        placeholder={placeholder}
+        placeholder={statePlaceholder}
         value={formattedNumber}
         className={inputClass}
-        required={required}
-        disabled={disabled}
-        autoFocus={autoFocus}
         inputRef={this.handleRefInput}
-        name={name}
-        label={label}
         error={error || !this.checkIfValid()}
-        helperText={helperText}
         onChange={this.handleInput}
         onClick={this.handleInputClick}
         onFocus={this.handleInputFocus}
@@ -791,15 +790,9 @@ MaterialUiPhoneNumber.propTypes = {
 
   value: PropTypes.string,
   placeholder: PropTypes.string,
-  name: PropTypes.string,
-  label: PropTypes.string,
-  required: PropTypes.bool,
   disabled: PropTypes.bool,
-  autoFocus: PropTypes.bool,
-  helperText: PropTypes.string,
   error: PropTypes.bool,
   variant: PropTypes.string,
-  fullWidth: PropTypes.bool,
   native: PropTypes.bool,
 
   inputClass: PropTypes.string,
@@ -841,15 +834,9 @@ MaterialUiPhoneNumber.defaultProps = {
   defaultCountry: '',
 
   placeholder: '+1 (702) 123-4567',
-  name: '',
-  required: false,
   disabled: false,
-  autoFocus: false,
-  label: null,
-  helperText: null,
   error: false,
   variant: 'standard',
-  fullWidth: false,
   native: false,
 
   inputClass: '',

@@ -81,27 +81,6 @@ export default render(
         />
         <p>Disabled flag by default</p>
         <p>Customizable placeholder</p>
-        <p>Customizable styles</p>
-        <MaterialUiPhoneNumber
-          disableAreaCodes
-          placeholder="Type your phone here"
-          inputStyle={{
-            width: '300px',
-            height: '35px',
-            fontSize: '13px',
-            paddingLeft: '48px',
-            borderRadius: '5px',
-          }}
-          buttonStyle={{ borderRadius: '5px 0 0 5px' }}
-          dropdownStyle={{ width: '300px' }}
-        />
-        <p>Customizable classes</p>
-        <MaterialUiPhoneNumber
-          containerClass="react-tel-input"
-          inputClass="custom-phone-input"
-          buttonClass="custom-phone-button"
-          dropdownClass="custom-dropdown"
-        />
       </div>
 
       <div style={{
