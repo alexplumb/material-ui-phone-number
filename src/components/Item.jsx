@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MenuItem from '@material-ui/core/MenuItem';
 import RootRef from '@material-ui/core/RootRef';
+import countryFlagData from '../country_flag_data';
 
 class Item extends React.PureComponent {
   render() {
@@ -33,7 +34,7 @@ class Item extends React.PureComponent {
           data-country-code={iso2}
           {...restProps}
         >
-          <div className={`flag ${iso2} margin`} />
+          <div className={`flag ${iso2} margin`} style={{backgroundImage: "url('data:image/png;base64,"+countryFlagData.flagDataForIso[iso2]}}/>
 
           <span className="country-name">
             {localization || name}
