@@ -639,6 +639,7 @@ class MaterialUiPhoneNumber extends React.Component {
                 open={Boolean(anchorEl)}
                 onClose={() => this.setState({ anchorEl: null })}
                 className={classes.native}
+                inputProps={{className: "flag", style: {background: flagBackground}}}
                 classes={{
                   root: classNames(classes.nativeRoot, 'native', inputFlagClasses),
                   select: classes.nativeSelect,
