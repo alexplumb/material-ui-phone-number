@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.1.1] - 2019-10-02
+## [2.2.2] - 2019-10-17
+### Fixed
+[Fixed a regression caused by updating to `@material-ui/core@4.5`](https://github.com/alexplumb/material-ui-phone-number/issues/31)
+
+## [2.2.1] - 2019-10-02
 ### Fixed
 - [Fixed a regression caused by switching from `componentWillReceiveProps` to `componentDidUpdate`](https://github.com/alexplumb/material-ui-phone-number/issues/28)
 - Fixed a regression with setting the `value` property

@@ -18,6 +18,7 @@ module.exports = {
     umdNamedDefine: true,
     globalObject: `(typeof self !== 'undefined' ? self : this)`, // eslint-disable-line
     libraryTarget: 'umd',
+    futureEmitAssets: true,
   },
   module: {
     rules: [
