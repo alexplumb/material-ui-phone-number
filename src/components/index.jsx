@@ -6,7 +6,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import Divider from '@material-ui/core/Divider';
-import RootRef from '@material-ui/core/RootRef';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
@@ -207,11 +206,9 @@ class MaterialUiPhoneNumber extends React.Component {
   scrollTo = (country) => {
     if (!country) { return; }
 
-    let container = this.dropdownContainerRef;
+    const container = this.dropdownContainerRef;
 
     if (!container || !document.body) { return; }
-
-    container = container.querySelector('[role="document"]');
     container.scrollTop = country.offsetTop;
   }
 
@@ -686,50 +683,49 @@ class MaterialUiPhoneNumber extends React.Component {
                 <div className={inputFlagClasses} />
               </Button>
 
-              <RootRef
-                rootRef={(el) => {
-                  this.dropdownContainerRef = el;
+              <Menu
+                className={dropdownClass}
+                id="country-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={() => this.setState({ anchorEl: null })}
+                onEnter={this.handleFlagDropdownClick}
+                PaperProps={{
+                  ref: (node) => {
+                    this.dropdownContainerRef = node;
+                  },
                 }}
               >
-                <Menu
-                  className={dropdownClass}
-                  id="country-menu"
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={() => this.setState({ anchorEl: null })}
-                  onEnter={this.handleFlagDropdownClick}
-                >
-                  {!!preferredCountries.length && map(preferredCountries, (country, index) => (
-                    <Item
-                      key={`preferred_${country.iso2}_${index}`}
-                      itemRef={(node) => {
-                        this.flags[`flag_no_${index}`] = node;
-                      }}
-                      onClick={() => this.handleFlagItemClick(country)}
-                      name={country.name}
-                      iso2={country.iso2}
-                      dialCode={country.dialCode}
-                      localization={localization && localization[country.name]}
-                    />
-                  ))}
+                {!!preferredCountries.length && map(preferredCountries, (country, index) => (
+                  <Item
+                    key={`preferred_${country.iso2}_${index}`}
+                    itemRef={(node) => {
+                      this.flags[`flag_no_${index}`] = node;
+                    }}
+                    onClick={() => this.handleFlagItemClick(country)}
+                    name={country.name}
+                    iso2={country.iso2}
+                    dialCode={country.dialCode}
+                    localization={localization && localization[country.name]}
+                  />
+                ))}
 
-                  {!!preferredCountries.length && <Divider />}
+                {!!preferredCountries.length && <Divider />}
 
-                  {map(onlyCountries, (country, index) => (
-                    <Item
-                      key={`preferred_${country.iso2}_${index}`}
-                      itemRef={(node) => {
-                        this.flags[`flag_no_${index}`] = node;
-                      }}
-                      onClick={() => this.handleFlagItemClick(country)}
-                      name={country.name}
-                      iso2={country.iso2}
-                      dialCode={country.dialCode}
-                      localization={localization && localization[country.name]}
-                    />
-                  ))}
-                </Menu>
-              </RootRef>
+                {map(onlyCountries, (country, index) => (
+                  <Item
+                    key={`preferred_${country.iso2}_${index}`}
+                    itemRef={(node) => {
+                      this.flags[`flag_no_${index}`] = node;
+                    }}
+                    onClick={() => this.handleFlagItemClick(country)}
+                    name={country.name}
+                    iso2={country.iso2}
+                    dialCode={country.dialCode}
+                    localization={localization && localization[country.name]}
+                  />
+                ))}
+              </Menu>
             </>
           )}
         </InputAdornment>
