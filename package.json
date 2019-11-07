@@ -54,11 +54,11 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "prop-types": "^15.7.2"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.2.1",
-    "classnames": "^2.2.6",
     "lodash": "^4.17.14",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
