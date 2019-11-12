@@ -18,9 +18,16 @@ module.exports = merge(common, {
         commonjs: 'react-dom',
         amd: 'react-dom',
       },
+      lodash: {
+        commonjs: 'lodash',
+        commonjs2: 'lodash',
+        amd: 'lodash',
+        root: '_',
+      },
     },
     '@material-ui/core',
     /@material-ui\/core\/*./,
+    'clsx',
   ],
   plugins: [
     new webpack.DefinePlugin({

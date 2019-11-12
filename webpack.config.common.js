@@ -17,7 +17,7 @@ module.exports = {
     library: 'MaterialUiPhoneNumber',
     umdNamedDefine: true,
     globalObject: `(typeof self !== 'undefined' ? self : this)`, // eslint-disable-line
-    libraryTarget: 'umd',
+    libraryTarget: 'commonjs2',
     futureEmitAssets: true,
   },
   module: {
