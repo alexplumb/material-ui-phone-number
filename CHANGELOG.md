@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.3] - 2019-11-12
+### Changed
+- Changed `clsx` to `clsx`
+- Moved all packages to dependencies rather than peerDependencies
+
 ## [2.2.2] - 2019-10-17
 ### Fixed
 [Fixed a regression caused by updating to `@material-ui/core@4.5`](https://github.com/alexplumb/material-ui-phone-number/issues/31)
@@ -33,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added support for a new `native` property for people who want to use a native select for the button dropdown
 ### Changed
 - Added support for material-ui 4
-- Added `classnames` to peer dependencies
+- Added `clsx` to peer dependencies
 - Added `lodash` to peer dependencies
 
 ## [1.6.0] - 2019-04-23

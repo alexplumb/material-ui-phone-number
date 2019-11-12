@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
@@ -636,7 +636,7 @@ class MaterialUiPhoneNumber extends React.Component {
                 onClose={() => this.setState({ anchorEl: null })}
                 className={classes.native}
                 classes={{
-                  root: classNames(classes.nativeRoot, 'native', inputFlagClasses),
+                  root: clsx(classes.nativeRoot, 'native', inputFlagClasses),
                   select: classes.nativeSelect,
                 }}
                 onChange={(e) => this.handleFlagItemClick(e.target.value)}
