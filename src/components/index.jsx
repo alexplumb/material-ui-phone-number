@@ -13,9 +13,9 @@ import {
   head, tail, debounce, memoize, trim, startsWith, isString,
 } from 'lodash';
 import countryData from '../country_data';
+import countryFlagData from '../country_flag_data';
 import Item from './Item';
 import '../styles.less';
-import '../flags.png';
 
 const styles = () => ({
   flagButton: {
@@ -621,6 +621,7 @@ class MaterialUiPhoneNumber extends React.Component {
     } = this.props;
 
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
+    const flagBackground = "url('data:image/png;base64,"+countryFlagData.flagDataForIso[selectedCountry.iso2];
 
     const dropdownProps = disableDropdown ? {} : {
       startAdornment: (
@@ -635,6 +636,7 @@ class MaterialUiPhoneNumber extends React.Component {
                 open={Boolean(anchorEl)}
                 onClose={() => this.setState({ anchorEl: null })}
                 className={classes.native}
+                inputProps={{className: "flag", style: {background: flagBackground}}}
                 classes={{
                   root: clsx(classes.nativeRoot, 'native', inputFlagClasses),
                   select: classes.nativeSelect,
@@ -680,7 +682,7 @@ class MaterialUiPhoneNumber extends React.Component {
                 onClick={(e) => this.setState({ anchorEl: e.currentTarget })}
                 aria-haspopup
               >
-                <div className={inputFlagClasses} />
+                <div className={inputFlagClasses} style={{backgroundImage: flagBackground}} />
               </Button>
 
               <Menu
