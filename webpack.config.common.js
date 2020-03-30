@@ -45,14 +45,6 @@ module.exports = {
         use: ['url-loader?limit=100000&mimetype=image/png'],
         exclude: /node_modules/,
       },
-      {
-        test: /\.less$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'less-loader' },
-        ],
-      },
     ],
   },
 };
