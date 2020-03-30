@@ -6,7 +6,7 @@ import RootRef from '@material-ui/core/RootRef';
 class Item extends React.PureComponent {
   render() {
     const {
-      name, iso2, dialCode, localization, itemRef, native, ...restProps
+      name, iso2, dialCode, localization, itemRef, native, flagClass, ...restProps
     } = this.props;
 
     if (native) {
@@ -33,7 +33,7 @@ class Item extends React.PureComponent {
           data-country-code={iso2}
           {...restProps}
         >
-          <div className={`flag ${iso2} margin`} />
+          <div className={`flag ${iso2} margin ${flagClass}`} />
 
           <span className="country-name">
             {localization || name}
@@ -53,6 +53,7 @@ Item.propTypes = {
   itemRef: PropTypes.func.isRequired,
   localization: PropTypes.string,
   native: PropTypes.bool,
+  flagClass: PropTypes.string.isRequired,
 };
 
 Item.defaultProps = {

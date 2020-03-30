@@ -589,7 +589,7 @@ class MaterialUiPhoneNumber extends React.Component {
     const {
       classes, dropdownClass, localization, disableDropdown, native,
     } = this.props;
-    const inputFlagClasses = `flag ${selectedCountry.iso2}`;
+    const inputFlagClasses = `flag ${selectedCountry.iso2} ${classes.flag}`;
 
     const isSelected = (country) => Boolean(selectedCountry && selectedCountry.dialCode === country.dialCode);
 
@@ -624,6 +624,7 @@ class MaterialUiPhoneNumber extends React.Component {
                     dialCode={country.dialCode}
                     localization={localization && localization[country.name]}
                     native
+                    flagClass={classes.flag}
                   />
                 ))}
 
@@ -638,6 +639,7 @@ class MaterialUiPhoneNumber extends React.Component {
                     dialCode={country.dialCode}
                     localization={localization && localization[country.name]}
                     native
+                    flagClass={classes.flag}
                   />
                 ))}
               </NativeSelect>
@@ -674,6 +676,7 @@ class MaterialUiPhoneNumber extends React.Component {
                       iso2={country.iso2}
                       dialCode={country.dialCode}
                       localization={localization && localization[country.name]}
+                      flagClass={classes.flag}
                     />
                   ))}
 
@@ -691,6 +694,7 @@ class MaterialUiPhoneNumber extends React.Component {
                       iso2={country.iso2}
                       dialCode={country.dialCode}
                       localization={localization && localization[country.name]}
+                      flagClass={classes.flag}
                     />
                   ))}
                 </Menu>
