@@ -14,8 +14,8 @@ import {
 } from 'lodash';
 import countryData from '../country_data';
 import Item from './Item';
-import '../styles.less';
-import '../flags.png';
+import flagStyles from '../flag_styles.css';
+import flagSprite from '../flags.png';
 
 const styles = () => ({
   flagButton: {
@@ -43,6 +43,7 @@ const styles = () => ({
   positionStart: {
     position: 'relative',
   },
+  ...flagStyles(flagSprite)
 });
 
 class MaterialUiPhoneNumber extends React.Component {
