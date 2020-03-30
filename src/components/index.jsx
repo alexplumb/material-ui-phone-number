@@ -14,8 +14,8 @@ import {
 } from 'lodash';
 import countryData from '../country_data';
 import Item from './Item';
-import '../styles.less';
-import '../flags.png';
+import flagStyles from '../flag_styles.css';
+import flagSprite from '../flags.png';
 
 const styles = () => ({
   flagButton: {
@@ -43,6 +43,7 @@ const styles = () => ({
   positionStart: {
     position: 'relative',
   },
+  ...flagStyles(flagSprite)
 });
 
 class MaterialUiPhoneNumber extends React.Component {
@@ -588,7 +589,7 @@ class MaterialUiPhoneNumber extends React.Component {
     const {
       classes, dropdownClass, localization, disableDropdown, native,
     } = this.props;
-    const inputFlagClasses = `flag ${selectedCountry.iso2}`;
+    const inputFlagClasses = `flag ${selectedCountry.iso2} ${classes.flag}`;
 
     const isSelected = (country) => Boolean(selectedCountry && selectedCountry.dialCode === country.dialCode);
 
@@ -623,6 +624,7 @@ class MaterialUiPhoneNumber extends React.Component {
                     dialCode={country.dialCode}
                     localization={localization && localization[country.name]}
                     native
+                    flagClass={classes.flag}
                   />
                 ))}
 
@@ -637,6 +639,7 @@ class MaterialUiPhoneNumber extends React.Component {
                     dialCode={country.dialCode}
                     localization={localization && localization[country.name]}
                     native
+                    flagClass={classes.flag}
                   />
                 ))}
               </NativeSelect>
@@ -673,6 +676,7 @@ class MaterialUiPhoneNumber extends React.Component {
                       iso2={country.iso2}
                       dialCode={country.dialCode}
                       localization={localization && localization[country.name]}
+                      flagClass={classes.flag}
                     />
                   ))}
 
@@ -690,6 +694,7 @@ class MaterialUiPhoneNumber extends React.Component {
                       iso2={country.iso2}
                       dialCode={country.dialCode}
                       localization={localization && localization[country.name]}
+                      flagClass={classes.flag}
                     />
                   ))}
                 </Menu>
