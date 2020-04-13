@@ -1,5 +1,9 @@
-# material-ui-phone-number
-An SSR-friendly, highly customiable Material UI React phone number input component with auto number formatting. Based on the excellent [material-ui-phone-number](https://github.com/alexplumb/material-ui-phone-number), based on [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2), based on [react-phone-input](https://github.com/razagill/react-phone-input).
+# mui-phone-input-ssr
+An SSR-friendly, highly customiable Material UI React phone number input component with auto number formatting. This repo exists as a temporary workaround for server-side rendering issues. 
+
+Based on the excellent [material-ui-phone-number](https://github.com/alexplumb/material-ui-phone-number), based on [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2), based on [react-phone-input](https://github.com/razagill/react-phone-input).
+
+Additional credit to Nathaniel Allred ([@neallred](https://github.com/neallred)).
 
 It uses @material-ui/core/TextField for rendering the phone input and looks like this:
 
@@ -215,6 +219,9 @@ Country data object not returns from onKeyDown event
     <td> the country object { name, dialCode, country code (iso2 format) } </td>
   </tr>
 </table>
+
+### Issues
+PRs unrelated to the SSR issue will not be accepted in this repo. Please submit unrelated PRs to [material-ui-phone-number](https://github.com/alexplumb/material-ui-phone-number/issues)
 
 ### Additional documentation
 
