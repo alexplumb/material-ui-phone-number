@@ -1,5 +1,5 @@
 # mui-phone-input-ssr
-An SSR-friendly, highly customiable Material UI React phone number input component with auto number formatting. This repo exists as a temporary workaround for server-side rendering issues. 
+An SSR-friendly, highly customizable Material UI React phone number input component with auto number formatting. This repo exists as a temporary workaround for server-side rendering issues. 
 
 Based on the excellent [material-ui-phone-number](https://github.com/alexplumb/material-ui-phone-number), based on [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2), based on [react-phone-input](https://github.com/razagill/react-phone-input).
 
