@@ -1,16 +1,17 @@
 # material-ui-phone-number
-Highly customizable phone input component with auto formatting. Based on the wonderful [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2) package.
+An SSR-friendly, highly customiable Material UI React phone number input component with auto number formatting. Based on the excellent [material-ui-phone-number](https://github.com/alexplumb/material-ui-phone-number), based on [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2), based on [react-phone-input](https://github.com/razagill/react-phone-input).
 
-It looks like this, but in Material Design:
+It uses @material-ui/core/TextField for rendering the phone input and looks like this:
 
-![alt tag](https://media.giphy.com/media/l378A8qFNzgiuPUre/giphy.gif)
-
-Uses @material-ui/core/TextField for rendering the phone input
+![alt tag](https://media.giphy.com/media/hu0wOWOqgxJP3IDvzR/giphy.gif)
 
 ## Installation
 
 ```shell-script
-npm install material-ui-phone-number --save
+yarn add mui-phone-input-ssr
+```
+```shell-script
+npm install mui-phone-input-ssr --save
 ```
 
 ## Usage
@@ -215,8 +216,15 @@ Country data object not returns from onKeyDown event
   </tr>
 </table>
 
+### Additional documentation
+
+See the following repos for additional documentation:
+- [material-ui-phone-number](https://github.com/alexplumb/material-ui-phone-number)
+- [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2)
+- [react-phone-input](https://github.com/razagill/react-phone-input)
+
 ## License
 
-Based on [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2)
+[MIT](https://opensource.org/licenses/MIT)
 
-Based on [react-phone-input](https://github.com/razagill/react-phone-input) using [MIT](https://opensource.org/licenses/MIT)
+Based on [material-ui-phone-number](https://github.com/alexplumb/material-ui-phone-number), based on [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2), based on [react-phone-input](https://github.com/razagill/react-phone-input) using [MIT](https://opensource.org/licenses/MIT).

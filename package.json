@@ -1,7 +1,7 @@
 {
-  "name": "material-ui-phone-number",
-  "version": "2.2.6",
-  "description": "A material-ui react component to format phone numbers. Based on react-phone-input-2",
+  "name": "mui-phone-input-ssr",
+  "version": "1.0.0",
+  "description": "An SSR-friendly Material UI React phone number input component. Based on the excellent material-ui-phone-number.",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,20 +10,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexplumb/material-ui-phone-number"
+    "url": "https://github.com/braxex/mui-phone-input-ssr"
   },
   "keywords": [
     "material",
     "react",
     "phone",
+    "telephone",
+    "input",
     "format",
-    "telephone"
+    "ssr"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/alexplumb/material-ui-phone-number/issues"
+    "url": "https://github.com/braxex/mui-phone-input-ssr/issues"
   },
-  "homepage": "https://github.com/alexplumb/material-ui-phone-number",
+  "homepage": "https://github.com/braxex/mui-phone-input-ssr",
   "devDependencies": {
     "@babel/core": "^7.5.4",
     "@babel/plugin-proposal-class-properties": "^7.5.0",
