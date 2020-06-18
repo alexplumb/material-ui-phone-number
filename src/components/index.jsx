@@ -72,11 +72,17 @@ class MaterialUiPhoneNumber extends React.Component {
     super(props);
     let filteredCountries = countryData.allCountries;
 
-    if (props.disableAreaCodes) filteredCountries = this.deleteAreaCodes(filteredCountries);
     if (props.regions) filteredCountries = this.filterRegions(props.regions, filteredCountries);
+    const filteredCountriesWithAreaCode = filteredCountries;
+    if (props.disableAreaCodes) filteredCountries = this.deleteAreaCodes(filteredCountries);
 
     const onlyCountries = this.excludeCountries(
       this.getOnlyCountries(props.onlyCountries, filteredCountries), props.excludeCountries,
+    );
+
+    // This's used to match always the country with the area code
+    const onlyCountriesWithAreaCode = this.excludeCountries(
+      this.getOnlyCountries(props.onlyCountries, filteredCountriesWithAreaCode), props.excludeCountries,
     );
 
     const preferredCountries = filter(filteredCountries, (country) => some(props.preferredCountries, (preferredCountry) => preferredCountry === country.iso2));
@@ -86,7 +92,7 @@ class MaterialUiPhoneNumber extends React.Component {
     let countryGuess;
     if (inputNumber.length > 1) {
       // Country detect by value field
-      countryGuess = this.guessSelectedCountry(inputNumber.replace(/\D/g, '').substring(0, 6), onlyCountries, props.defaultCountry) || 0;
+      countryGuess = this.guessSelectedCountry(inputNumber.replace(/\D/g, '').substring(0, 6), onlyCountriesWithAreaCode, props.defaultCountry) || 0;
     } else if (props.defaultCountry) {
       // Default country
       countryGuess = find(onlyCountries, { iso2: props.defaultCountry }) || 0;
@@ -112,6 +118,7 @@ class MaterialUiPhoneNumber extends React.Component {
       formattedNumber,
       placeholder: props.placeholder,
       onlyCountries,
+      onlyCountriesWithAreaCode,
       preferredCountries,
       defaultCountry: props.defaultCountry,
       selectedCountry: countryGuess,
@@ -297,7 +304,7 @@ class MaterialUiPhoneNumber extends React.Component {
   handleInput = (e) => {
     let { selectedCountry: newSelectedCountry, freezeSelection } = this.state;
     const {
-      selectedCountry, formattedNumber: oldFormattedText, onlyCountries, defaultCountry,
+      selectedCountry, formattedNumber: oldFormattedText, onlyCountriesWithAreaCode, defaultCountry,
     } = this.state;
     const {
       disableCountryCode, countryCodeEditable, isModernBrowser, onChange,
@@ -337,7 +344,7 @@ class MaterialUiPhoneNumber extends React.Component {
       // the guess country function can then use memoization much more effectively since the set of input it
       // gets has drastically reduced
       if (!freezeSelection || selectedCountry.dialCode.length > inputNumber.length) {
-        newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), onlyCountries, defaultCountry);
+        newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), onlyCountriesWithAreaCode, defaultCountry);
         freezeSelection = false;
       }
       // let us remove all non numerals from the input
@@ -555,7 +562,7 @@ class MaterialUiPhoneNumber extends React.Component {
   };
 
   updateFormattedNumber = (number) => {
-    const { onlyCountries, defaultCountry } = this.state;
+    const { onlyCountriesWithAreaCode, defaultCountry } = this.state;
     const { disableCountryCode } = this.props;
 
     let countryGuess;
@@ -565,7 +572,7 @@ class MaterialUiPhoneNumber extends React.Component {
     // if inputNumber does not start with '+', then use default country's dialing prefix,
     // otherwise use logic for finding country based on country prefix.
     if (!inputNumber.startsWith('+')) {
-      countryGuess = find(onlyCountries, { iso2: defaultCountry });
+      countryGuess = find(onlyCountriesWithAreaCode, { iso2: defaultCountry });
       const dialCode = countryGuess && !startsWith(inputNumber.replace(/\D/g, ''), countryGuess.dialCode) ? countryGuess.dialCode : '';
       formattedNumber = this.formatNumber(
         (disableCountryCode ? '' : dialCode) + inputNumber.replace(/\D/g, ''),
@@ -573,7 +580,7 @@ class MaterialUiPhoneNumber extends React.Component {
       );
     } else {
       inputNumber = inputNumber.replace(/\D/g, '');
-      countryGuess = this.guessSelectedCountry(inputNumber.substring(0, 6), onlyCountries, defaultCountry);
+      countryGuess = this.guessSelectedCountry(inputNumber.substring(0, 6), onlyCountriesWithAreaCode, defaultCountry);
       formattedNumber = this.formatNumber(inputNumber, countryGuess.format);
     }
 
