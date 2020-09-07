@@ -16,6 +16,8 @@ npm install material-ui-phone-number --save
 ## Usage
 
 ```jsx
+import MuiPhoneNumber from 'material-ui-phone-number';
+
 React.render(
   <MuiPhoneNumber defaultCountry={'us'} onChange={handleOnChange}/>,
   document.getElementById('root')
