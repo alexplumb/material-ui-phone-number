@@ -1351,6 +1351,7 @@ const rawAllCountries = [
     ['africa', 'north-africa'],
     'tn',
     '216',
+    '+... .. .. .. ..',
   ],
   [
     'Turkey',
