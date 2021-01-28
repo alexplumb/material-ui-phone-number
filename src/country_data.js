@@ -778,6 +778,7 @@ const rawAllCountries = [
     ['africa'],
     'mg',
     '261',
+    '+... .......',
   ],
   [
     'Malawi',
@@ -833,6 +834,7 @@ const rawAllCountries = [
     ['africa'],
     'mu',
     '230',
+    '+... . ... ....',
   ],
   [
     'Mexico',
@@ -1070,6 +1072,7 @@ const rawAllCountries = [
     ['africa'],
     're',
     '262',
+    '+.. . .. .. .. ..',
   ],
   [
     'Romania',
@@ -1178,6 +1181,7 @@ const rawAllCountries = [
     ['africa'],
     'sc',
     '248',
+    '+... ......',
   ],
   [
     'Sierra Leone',
@@ -1227,6 +1231,7 @@ const rawAllCountries = [
     ['africa'],
     'za',
     '27',
+    '+.. .. ... ....',
   ],
   [
     'South Korea',
