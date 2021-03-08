@@ -696,6 +696,12 @@ const rawAllCountries = [
     '686',
   ],
   [
+    'Kosova',
+    ['europe'],
+    'ks',
+    '383',
+  ],
+  [
     'Kuwait',
     ['middle-east'],
     'kw',
@@ -1478,7 +1484,7 @@ const rawAllCountries = [
     ['africa'],
     'zw',
     '263',
-  ],
+  ],  
 ];
 
 const allCountryCodes = {};
