@@ -3,6 +3,7 @@
   "version": "2.2.6",
   "description": "A material-ui react component to format phone numbers. Based on react-phone-input-2",
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config webpack.config.dev.js --hot --progress --mode development",
@@ -30,6 +31,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.5.4",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
+    "@types/react": "^17.0.8",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.2.2",
     "babel-plugin-lodash": "^3.3.4",
