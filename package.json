@@ -1,6 +1,6 @@
 {
   "name": "mui-phone-input-ssr",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "An SSR-friendly Material UI React phone number input component. Based on the excellent material-ui-phone-number.",
   "main": "dist/index.js",
   "types": "index.d.ts",
