@@ -1,5 +1,0 @@
-.github
-.yarn/*
-node_modules
-dist/*.js
-index.d.ts
