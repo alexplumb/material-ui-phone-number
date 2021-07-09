@@ -918,7 +918,7 @@ const rawAllCountries = [
     'Netherlands',
     ['europe', 'european-union'],
     'nl',
-    '316',
+    '31',
     '+.. . ........',
   ],
   [
