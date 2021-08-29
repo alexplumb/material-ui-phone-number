@@ -708,6 +708,12 @@ const rawAllCountries = [
     '686',
   ],
   [
+    'Kosovo',
+    ['europe'],
+    'ks',
+    '383',
+  ],
+  [
     'Kuwait',
     ['middle-east'],
     'kw',
