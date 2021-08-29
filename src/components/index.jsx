@@ -272,10 +272,12 @@ class MaterialUiPhoneNumber extends React.Component {
     const { isModernBrowser } = this.props;
 
     const input = this.inputRef;
-    input.focus();
-    if (isModernBrowser) {
-      const len = input.value.length;
-      input.setSelectionRange(len, len);
+    if (input) {
+      input.focus();
+      if (isModernBrowser) {
+        const len = input.value.length;
+        input.setSelectionRange(len, len);
+      }
     }
   }
 
