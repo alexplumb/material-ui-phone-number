@@ -1484,7 +1484,7 @@ const rawAllCountries = [
     ['africa'],
     'zw',
     '263',
-  ],  
+  ],
 ];
 
 const allCountryCodes = {};
