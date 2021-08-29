@@ -911,6 +911,7 @@ const rawAllCountries = [
     ['africa'],
     'mz',
     '258',
+    '+... ... ......',
   ],
   [
     'Myanmar',
