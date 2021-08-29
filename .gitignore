@@ -3,3 +3,11 @@ node_modules
 package-lock.json
 animation.gif
 ./package-lock.json
+dist
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

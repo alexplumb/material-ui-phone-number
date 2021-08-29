@@ -7,15 +7,15 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import Divider from '@material-ui/core/Divider';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import withStyles from '@material-ui/styles/withStyles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import {
   some, find, reduce, map, filter, includes, findIndex,
   head, tail, debounce, memoize, trim, startsWith, isString,
 } from 'lodash';
 import countryData from '../country_data';
 import Item from './Item';
-import '../styles.less';
-import '../flags.png';
+import flagStyles from '../flag_styles.css';
+import flagSprite from '../flags.png';
 
 const styles = () => ({
   flagButton: {
@@ -43,6 +43,7 @@ const styles = () => ({
   positionStart: {
     position: 'relative',
   },
+  ...flagStyles(flagSprite)
 });
 
 class MaterialUiPhoneNumber extends React.Component {
@@ -269,11 +270,10 @@ class MaterialUiPhoneNumber extends React.Component {
 
   // Put the cursor to the end of the input (usually after a focus event)
   cursorToEnd = () => {
-    const { isModernBrowser } = this.props;
-
     const input = this.inputRef;
     if (input) {
       input.focus();
+      const { isModernBrowser } = this.props;
       if (isModernBrowser) {
         const len = input.value.length;
         input.setSelectionRange(len, len);
@@ -590,7 +590,7 @@ class MaterialUiPhoneNumber extends React.Component {
     const {
       classes, dropdownClass, localization, disableDropdown, native,
     } = this.props;
-    const inputFlagClasses = `flag ${selectedCountry.iso2}`;
+    const inputFlagClasses = `flag ${selectedCountry.iso2} ${classes.flag}`;
 
     onlyCountries.sort((a, b) => {
       const localizedA = localization[a.name] || a.name;
@@ -631,6 +631,7 @@ class MaterialUiPhoneNumber extends React.Component {
                     dialCode={country.dialCode}
                     localization={localization && localization[country.name]}
                     native
+                    flagClass={classes.flag}
                   />
                 ))}
 
@@ -645,6 +646,7 @@ class MaterialUiPhoneNumber extends React.Component {
                     dialCode={country.dialCode}
                     localization={localization && localization[country.name]}
                     native
+                    flagClass={classes.flag}
                   />
                 ))}
               </NativeSelect>
@@ -681,6 +683,7 @@ class MaterialUiPhoneNumber extends React.Component {
                       iso2={country.iso2}
                       dialCode={country.dialCode}
                       localization={localization && localization[country.name]}
+                      flagClass={classes.flag}
                     />
                   ))}
 
@@ -698,6 +701,7 @@ class MaterialUiPhoneNumber extends React.Component {
                       iso2={country.iso2}
                       dialCode={country.dialCode}
                       localization={localization && localization[country.name]}
+                      flagClass={classes.flag}
                     />
                   ))}
                 </Menu>

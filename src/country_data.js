@@ -665,7 +665,7 @@ const rawAllCountries = [
     ['europe', 'european-union'],
     'it',
     '39',
-    '+.. ... .......',
+    '+.. ... ... ....',
     0,
   ],
   [
@@ -943,7 +943,7 @@ const rawAllCountries = [
     ['europe', 'european-union'],
     'nl',
     '31',
-    '+.. .. ........',
+    '+.. . ........',
   ],
   [
     'New Caledonia',
