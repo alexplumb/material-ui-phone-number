@@ -152,6 +152,7 @@ const rawAllCountries = [
     ['africa'],
     'bj',
     '229',
+    '+... .... ....',
   ],
   [
     'Bermuda',
@@ -219,12 +220,14 @@ const rawAllCountries = [
     ['africa'],
     'bf',
     '226',
+    '+... .. .. .. ..',
   ],
   [
     'Burundi',
     ['africa'],
     'bi',
     '257',
+    '+... .. .. .. ..',
   ],
   [
     'Cambodia',
@@ -251,6 +254,7 @@ const rawAllCountries = [
     ['africa'],
     'cv',
     '238',
+    '+... ... .. ..',
   ],
   [
     'Caribbean Netherlands',
@@ -271,12 +275,14 @@ const rawAllCountries = [
     ['africa'],
     'cf',
     '236',
+    '+... .... ....',
   ],
   [
     'Chad',
     ['africa'],
     'td',
     '235',
+    '+... .. .. .. ..',
   ],
   [
     'Chile',
@@ -302,6 +308,7 @@ const rawAllCountries = [
     ['africa'],
     'km',
     '269',
+    '+... ... ....',
   ],
   [
     'Congo',
@@ -314,6 +321,7 @@ const rawAllCountries = [
     ['africa'],
     'cg',
     '242',
+    '+... .. .. .....',
   ],
   [
     'Cook Islands',
@@ -333,6 +341,7 @@ const rawAllCountries = [
     ['africa'],
     'ci',
     '225',
+    '+... .. .. .. ..',
   ],
   [
     'Croatia',
@@ -418,6 +427,7 @@ const rawAllCountries = [
     ['africa'],
     'gq',
     '240',
+    '+... .. ... ....',
   ],
   [
     'Eritrea',
@@ -487,6 +497,7 @@ const rawAllCountries = [
     ['africa'],
     'ga',
     '241',
+    '+... .. .. .. ..',
   ],
   [
     'Gambia',
@@ -563,6 +574,7 @@ const rawAllCountries = [
     ['africa'],
     'gn',
     '224',
+    '+... . ... ....',
   ],
   [
     'Guinea-Bissau',
@@ -696,6 +708,12 @@ const rawAllCountries = [
     '686',
   ],
   [
+    'Kosovo',
+    ['europe'],
+    'ks',
+    '383',
+  ],
+  [
     'Kuwait',
     ['middle-east'],
     'kw',
@@ -778,7 +796,7 @@ const rawAllCountries = [
     ['africa'],
     'mg',
     '261',
-    '+... .......',
+    '+... .. . ......',
   ],
   [
     'Malawi',
@@ -804,6 +822,7 @@ const rawAllCountries = [
     ['africa'],
     'ml',
     '223',
+    '+... .... ....',
   ],
   [
     'Malta',
@@ -828,6 +847,7 @@ const rawAllCountries = [
     ['africa'],
     'mr',
     '222',
+    '+... .... ....',
   ],
   [
     'Mauritius',
@@ -884,6 +904,7 @@ const rawAllCountries = [
     ['africa', 'north-africa'],
     'ma',
     '212',
+    '+212-.........',
   ],
   [
     'Mozambique',
@@ -946,6 +967,7 @@ const rawAllCountries = [
     ['africa'],
     'ne',
     '227',
+    '+... .. .. .. ..',
   ],
   [
     'Nigeria',
@@ -1093,6 +1115,7 @@ const rawAllCountries = [
     ['africa'],
     'rw',
     '250',
+    '+... ... ... ...',
   ],
   [
     'Saint Barthélemy',
@@ -1157,6 +1180,7 @@ const rawAllCountries = [
     ['africa'],
     'st',
     '239',
+    '+... ... ....',
   ],
   [
     'Saudi Arabia',
@@ -1169,6 +1193,7 @@ const rawAllCountries = [
     ['africa'],
     'sn',
     '221',
+    '+... .. ... .. ..',
   ],
   [
     'Serbia',
@@ -1181,7 +1206,7 @@ const rawAllCountries = [
     ['africa'],
     'sc',
     '248',
-    '+... ......',
+    '+... ... ....', // from https://en.wikipedia.org/wiki/Telephone_numbers_in_Seychelles
   ],
   [
     'Sierra Leone',
@@ -1332,6 +1357,7 @@ const rawAllCountries = [
     ['africa'],
     'tg',
     '228',
+    '+... ... .....',
   ],
   [
     'Tokelau',
@@ -1356,6 +1382,7 @@ const rawAllCountries = [
     ['africa', 'north-africa'],
     'tn',
     '216',
+    '+... .. ... ...',
   ],
   [
     'Turkey',
