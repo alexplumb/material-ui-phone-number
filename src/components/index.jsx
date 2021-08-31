@@ -590,7 +590,7 @@ class MaterialUiPhoneNumber extends React.Component {
     const {
       classes, dropdownClass, localization, disableDropdown, native,
     } = this.props;
-    const inputFlagClasses = `flag ${selectedCountry.iso2}`;
+    const inputFlagClasses = `flag ${selectedCountry && selectedCountry.iso2}`;
 
     onlyCountries.sort((a, b) => {
       const localizedA = localization[a.name] || a.name;
