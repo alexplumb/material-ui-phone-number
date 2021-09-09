@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MenuItem from '@material-ui/core/MenuItem';
+import MenuItem from '@mui/material/MenuItem';
 
 class Item extends React.PureComponent {
   render() {
     const ref = React.createRef();
     const {
-      name, iso2, dialCode, localization, itemRef, native, ...restProps
+      name,
+      iso2,
+      dialCode,
+      localization,
+      itemRef,
+      native,
+      ...restProps
     } = this.props;
 
     if (native) {
@@ -18,9 +24,7 @@ class Item extends React.PureComponent {
           value={iso2}
           {...restProps}
         >
-          {localization || name}
-          {' '}
-          {`+${dialCode}`}
+          {localization || name} {`+${dialCode}`}
         </option>
       );
     }
@@ -35,9 +39,7 @@ class Item extends React.PureComponent {
       >
         <div className={`flag ${iso2} margin`} />
 
-        <span className="country-name">
-          {localization || name}
-        </span>
+        <span className="country-name">{localization || name}</span>
 
         <span className="dial-code">{`+${dialCode}`}</span>
       </MenuItem>
