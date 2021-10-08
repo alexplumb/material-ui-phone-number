@@ -354,7 +354,6 @@ class MaterialUiPhoneNumber extends React.Component {
         : selectedCountry,
     }, () => {
       if (isModernBrowser) {
-
         const lastChar = formattedNumber.charAt(formattedNumber.length - 1);
 
         if (lastChar === ')') {
