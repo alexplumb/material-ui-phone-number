@@ -346,9 +346,6 @@ class MaterialUiPhoneNumber extends React.Component {
       formattedNumber = this.formatNumber(inputNumber, newSelectedCountry.format);
     }
 
-    let caretPosition = e.target.selectionStart;
-    const diff = formattedNumber.length - oldFormattedText.length;
-
     this.setState({
       formattedNumber,
       freezeSelection,
@@ -357,16 +354,11 @@ class MaterialUiPhoneNumber extends React.Component {
         : selectedCountry,
     }, () => {
       if (isModernBrowser) {
-        if (diff > 0) {
-          caretPosition -= diff;
-        }
 
         const lastChar = formattedNumber.charAt(formattedNumber.length - 1);
 
         if (lastChar === ')') {
           this.inputRef.setSelectionRange(formattedNumber.length - 1, formattedNumber.length - 1);
-        } else if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
-          this.inputRef.setSelectionRange(caretPosition, caretPosition);
         }
       }
 
