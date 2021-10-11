@@ -5,7 +5,7 @@ It looks like this, but in Material Design:
 
 ![alt tag](https://media.giphy.com/media/l378A8qFNzgiuPUre/giphy.gif)
 
-Uses @material-ui/core/TextField for rendering the phone input
+Uses @mui/material/TextField for rendering the phone input
 
 ## Installation
 
