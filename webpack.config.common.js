@@ -18,7 +18,6 @@ module.exports = {
     umdNamedDefine: true,
     globalObject: `(typeof self !== 'undefined' ? self : this)`, // eslint-disable-line
     libraryTarget: 'umd',
-    futureEmitAssets: true,
   },
   module: {
     rules: [
@@ -41,9 +40,8 @@ module.exports = {
         },
       },
       {
-        test: /\.png.*$/,
-        use: ['url-loader?limit=100000&mimetype=image/png'],
-        exclude: /node_modules/,
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        type: 'asset/resource',
       },
       {
         test: /\.less$/,

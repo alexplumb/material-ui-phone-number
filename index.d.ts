@@ -1,4 +1,4 @@
-import { TextFieldProps } from "@material-ui/core";
+import { TextFieldProps } from "@mui/material";
 import * as React from "react";
 
 export type MuiPhoneNumberProps = TextFieldProps & {

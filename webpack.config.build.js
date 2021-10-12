@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const common = require('./webpack.config.common');
 
 module.exports = merge(common, {
@@ -25,8 +25,8 @@ module.exports = merge(common, {
         root: '_',
       },
     },
-    '@material-ui/core',
-    /@material-ui\/core\/*./,
+    '@mui/material',
+    /@mui\/material\/*./,
     'clsx',
   ],
   plugins: [

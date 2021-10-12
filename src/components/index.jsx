@@ -1,27 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import Divider from '@material-ui/core/Divider';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import withStyles from '@material-ui/styles/withStyles';
+import Flags from 'country-flag-icons/react/3x2'
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import Divider from '@mui/material/Divider';
+import NativeSelect from '@mui/material/NativeSelect';
+import withStyles from '@mui/styles/withStyles';
 import {
   some, find, reduce, map, filter, includes, findIndex,
   head, tail, debounce, memoize, trim, startsWith, isString,
 } from 'lodash';
 import countryData from '../country_data';
 import Item from './Item';
-import '../styles.less';
-import '../flags.png';
 
 const styles = () => ({
   flagButton: {
     minWidth: 30,
     padding: 0,
     height: 30,
+  },
+  flagIcon: {
+    width: 16,
+    marginRight: 8,
   },
   native: {
     width: 30,
@@ -588,9 +591,9 @@ class MaterialUiPhoneNumber extends React.Component {
     } = this.state;
 
     const {
-      classes, dropdownClass, localization, disableDropdown, native,
+      classes, dropdownClass, localization, disableDropdown,
+      native,
     } = this.props;
-    const inputFlagClasses = `flag ${selectedCountry.iso2}`;
 
     onlyCountries.sort((a, b) => {
       const localizedA = localization[a.name] || a.name;
@@ -599,6 +602,8 @@ class MaterialUiPhoneNumber extends React.Component {
     });
 
     const isSelected = (country) => Boolean(selectedCountry && selectedCountry.dialCode === country.dialCode);
+
+    const FlagComponent = Flags[selectedCountry.iso2.toUpperCase()];
 
     const dropdownProps = disableDropdown ? {} : {
       startAdornment: (
@@ -614,10 +619,11 @@ class MaterialUiPhoneNumber extends React.Component {
                 onClose={() => this.setState({ anchorEl: null })}
                 className={classes.native}
                 classes={{
-                  root: clsx(classes.nativeRoot, 'native', inputFlagClasses),
+                  root: clsx(classes.nativeRoot, 'native'),
                   select: classes.nativeSelect,
                 }}
                 onChange={(e) => this.handleFlagItemClick(e.target.value)}
+                IconComponent={Boolean(FlagComponent) && FlagComponent}
                 disableUnderline
               >
                 {!!preferredCountries.length && map(preferredCountries, (country, index) => (
@@ -652,15 +658,15 @@ class MaterialUiPhoneNumber extends React.Component {
           )
             : (
               <>
-                <Button
+                <IconButton
                   className={classes.flagButton}
                   aria-owns={anchorEl ? 'country-menu' : null}
                   aria-label="Select country"
                   onClick={(e) => this.setState({ anchorEl: e.currentTarget })}
                   aria-haspopup
                 >
-                  <div className={inputFlagClasses} />
-                </Button>
+                  {Boolean(FlagComponent) && <FlagComponent className="margin" />}
+                </IconButton>
 
                 <Menu
                   className={dropdownClass}
@@ -681,6 +687,7 @@ class MaterialUiPhoneNumber extends React.Component {
                       iso2={country.iso2}
                       dialCode={country.dialCode}
                       localization={localization && localization[country.name]}
+                      className={classes.flagIcon}
                     />
                   ))}
 
@@ -698,6 +705,7 @@ class MaterialUiPhoneNumber extends React.Component {
                       iso2={country.iso2}
                       dialCode={country.dialCode}
                       localization={localization && localization[country.name]}
+                      className={classes.flagIcon}
                     />
                   ))}
                 </Menu>
