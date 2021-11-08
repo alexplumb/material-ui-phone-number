@@ -742,6 +742,7 @@ const rawAllCountries = [
     ['middle-east'],
     'lb',
     '961',
+    '+... .. ... ...',
   ],
   [
     'Lesotho',
