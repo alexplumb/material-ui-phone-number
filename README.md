@@ -109,6 +109,11 @@ function handleOnChange(value) {
     <td> bool </td>
     <td colspan="2"> true by default </td>
   </tr>
+  <tr>
+    <td> flagIcons </td>
+    <td> object </td>
+    <td colspan="2"> A dictionary of the countryCode => asset.svg (see country-flag-icons/react/3x2) </td>
+  </tr>
 
   <tr>
     <td colspan="4"><b>Supported TextField props</b></td>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import Flags from 'country-flag-icons/react/1x1';
 import MaterialUiPhoneNumber from './index';
 
 class ChangeDemo extends React.Component {
@@ -60,6 +61,12 @@ export default render(
         defaultCountry="it"
         preferredCountries={['it', 'se']}
         native
+      />
+      <p>Prop supplied icons</p>
+      <MaterialUiPhoneNumber
+        defaultCountry="it"
+        preferredCountries={['it', 'se']}
+        flagIcons={Flags}
       />
     </div>
 
