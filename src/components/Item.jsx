@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MenuItem from '@mui/material/MenuItem';
-import Flags from 'country-flag-icons/react/3x2'
 
 class Item extends React.PureComponent {
   render() {
     const ref = React.createRef();
     const {
       name, iso2, dialCode, localization,
-      itemRef, native, className = '', ...restProps
+      itemRef, native, flagIcons, className = '', ...restProps
     } = this.props;
 
     if (native) {
@@ -27,7 +26,7 @@ class Item extends React.PureComponent {
       );
     }
 
-    const FlagComponent = Flags[iso2.toUpperCase()];
+    const FlagComponent = flagIcons[iso2.toUpperCase()];
 
     return (
       <MenuItem
@@ -60,6 +59,7 @@ Item.propTypes = {
   itemRef: PropTypes.func.isRequired,
   localization: PropTypes.string,
   native: PropTypes.bool,
+  flagIcons: PropTypes.object,
 };
 
 Item.defaultProps = {

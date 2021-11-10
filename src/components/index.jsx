@@ -592,7 +592,7 @@ class MaterialUiPhoneNumber extends React.Component {
 
     const {
       classes, dropdownClass, localization, disableDropdown,
-      native,
+      native, flagIcons
     } = this.props;
 
     onlyCountries.sort((a, b) => {
@@ -603,7 +603,8 @@ class MaterialUiPhoneNumber extends React.Component {
 
     const isSelected = (country) => Boolean(selectedCountry && selectedCountry.dialCode === country.dialCode);
 
-    const FlagComponent = Flags[selectedCountry.iso2.toUpperCase()];
+    const flagIconsDictionary = flagIcons || Flags
+    const FlagComponent = flagIconsDictionary[selectedCountry.iso2.toUpperCase()];
 
     const dropdownProps = disableDropdown ? {} : {
       startAdornment: (
@@ -636,6 +637,7 @@ class MaterialUiPhoneNumber extends React.Component {
                     iso2={country.iso2}
                     dialCode={country.dialCode}
                     localization={localization && localization[country.name]}
+                    flagIcons={flagIconsDictionary}
                     native
                   />
                 ))}
@@ -649,6 +651,7 @@ class MaterialUiPhoneNumber extends React.Component {
                     name={country.name}
                     iso2={country.iso2}
                     dialCode={country.dialCode}
+                    flagIcons={flagIconsDictionary}
                     localization={localization && localization[country.name]}
                     native
                   />
@@ -687,6 +690,7 @@ class MaterialUiPhoneNumber extends React.Component {
                       iso2={country.iso2}
                       dialCode={country.dialCode}
                       localization={localization && localization[country.name]}
+                      flagIcons={flagIconsDictionary}
                       className={classes.flagIcon}
                     />
                   ))}
@@ -705,6 +709,7 @@ class MaterialUiPhoneNumber extends React.Component {
                       iso2={country.iso2}
                       dialCode={country.dialCode}
                       localization={localization && localization[country.name]}
+                      flagIcons={flagIconsDictionary}
                       className={classes.flagIcon}
                     />
                   ))}
@@ -729,7 +734,7 @@ class MaterialUiPhoneNumber extends React.Component {
       dropdownClass, autoFormat, disableAreaCodes, isValid, disableCountryCode,
       disableDropdown, enableLongNumbers, countryCodeEditable, onEnterKeyPress,
       isModernBrowser, classes, keys, localization, placeholder, regions, onChange,
-      value,
+      value, flagIcons,
       // end placeholder props
       inputClass, error, InputProps,
       ...restProps
@@ -805,6 +810,8 @@ MaterialUiPhoneNumber.propTypes = {
   isModernBrowser: PropTypes.func,
   onEnterKeyPress: PropTypes.func,
   keys: PropTypes.object,
+
+  flagIcons: PropTypes.object,
 };
 
 MaterialUiPhoneNumber.defaultProps = {
