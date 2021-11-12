@@ -18,6 +18,7 @@ import Item from './Item';
 
 const styles = () => ({
   flagButton: {
+    width: 'min-content',
     minWidth: 30,
     padding: 0,
     height: 30,
