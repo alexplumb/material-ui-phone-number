@@ -12,6 +12,7 @@ export type MuiPhoneNumberProps = TextFieldProps & {
   dropdownClass?: string;
   enableLongNumbers?: boolean;
   excludeCountries?: string[];
+  localization?: Record<string, string>;
   inputClass?: string;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string
