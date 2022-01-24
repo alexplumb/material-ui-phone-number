@@ -312,7 +312,7 @@ class MaterialUiPhoneNumber extends React.Component {
 
     if (!countryCodeEditable) {
       const updatedInput = `+${newSelectedCountry.dialCode}`;
-      if (e.target.value.length < updatedInput.length) {
+      if (!e.target.value.startsWith(updatedInput)) {
         return;
       }
     }
