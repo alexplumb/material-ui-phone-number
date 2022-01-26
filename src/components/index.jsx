@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import Flags from 'country-flag-icons/react/3x2'
+import { styled } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
 import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
 import Divider from '@mui/material/Divider'
 import NativeSelect from '@mui/material/NativeSelect'
-import withStyles from '@mui/styles/withStyles'
 import {
   some,
   find,
@@ -28,28 +28,30 @@ import {
 import countryData from '../country_data'
 import Item from './Item'
 
+const IconButtonStyled = styled(IconButton)(({ theme }) => ({
+  width: 'min-content',
+  minWidth: 30,
+  padding: 0,
+  height: 30,
+  '& svg': {
+    width: 'fill-available',
+  },
+}))
+
+const FlagIconStyled = styled(Item)(({ theme }) => ({
+  width: 16,
+  marginRight: 8,
+}))
+
+const NativeSelectStyled = styled(NativeSelect)(({ theme }) => ({
+  width: 30,
+  height: 30,
+  padding: 8,
+}))
+
 const styles = () => ({
-  flagButton: {
-    width: 'min-content',
-    minWidth: 30,
-    padding: 0,
-    height: 30,
-    '& svg': {
-      width: 'fill-available',
-    },
-  },
-  flagIcon: {
-    width: 16,
-    marginRight: 8,
-  },
-  native: {
-    width: 30,
-    height: 30,
-    padding: 8,
-  },
   nativeRoot: {
     padding: 0,
-
     '& + svg': {
       display: 'none',
     },
@@ -58,9 +60,6 @@ const styles = () => ({
     padding: 0,
     lineHeight: 0,
     height: 11,
-  },
-  positionStart: {
-    position: 'relative',
   },
 })
 
@@ -672,18 +671,17 @@ class MaterialUiPhoneNumber extends React.Component {
       ? {}
       : {
           startAdornment: (
-            <InputAdornment className={classes.positionStart} position="start">
+            <InputAdornment sx={{ position: 'relative' }} position="start">
               {native ? (
                 <>
-                  <NativeSelect
+                  <NativeSelectStyled
                     id="country-menu"
                     open={Boolean(anchorEl)}
                     onClose={() => this.setState({ anchorEl: null })}
-                    className={classes.native}
-                    classes={{
-                      root: clsx(classes.nativeRoot, 'native'),
-                      select: classes.nativeSelect,
-                    }}
+                    // classes={{
+                    //   root: clsx(classes.nativeRoot, 'native'),
+                    //   select: classes.nativeSelect,
+                    // }}
                     onChange={(e) => this.handleFlagItemClick(e.target.value)}
                     IconComponent={Boolean(FlagComponent) && FlagComponent}
                     disableUnderline
@@ -716,19 +714,18 @@ class MaterialUiPhoneNumber extends React.Component {
                         native
                       />
                     ))}
-                  </NativeSelect>
+                  </NativeSelectStyled>
                 </>
               ) : (
                 <>
-                  <IconButton
-                    className={classes.flagButton}
+                  <IconButtonStyled
                     aria-owns={anchorEl ? 'country-menu' : null}
                     aria-label="Select country"
                     onClick={(e) => this.setState({ anchorEl: e.currentTarget })}
                     aria-haspopup
                   >
                     {Boolean(FlagComponent) && <FlagComponent className="margin" />}
-                  </IconButton>
+                  </IconButtonStyled>
 
                   <Menu
                     className={dropdownClass}
@@ -739,7 +736,7 @@ class MaterialUiPhoneNumber extends React.Component {
                   >
                     {!!preferredCountries.length &&
                       map(preferredCountries, (country, index) => (
-                        <Item
+                        <FlagIconStyled
                           key={`preferred_${country.iso2}_${index}`}
                           itemRef={(node) => {
                             this.flags[`flag_no_${index}`] = node
@@ -750,14 +747,13 @@ class MaterialUiPhoneNumber extends React.Component {
                           iso2={country.iso2}
                           dialCode={country.dialCode}
                           localization={localization && localization[country.name]}
-                          className={classes.flagIcon}
                         />
                       ))}
 
                     {!!preferredCountries.length && <Divider />}
 
                     {map(onlyCountries, (country, index) => (
-                      <Item
+                      <FlagIconStyled
                         key={`preferred_${country.iso2}_${index}`}
                         itemRef={(node) => {
                           this.flags[`flag_no_${index}`] = node
@@ -768,7 +764,6 @@ class MaterialUiPhoneNumber extends React.Component {
                         iso2={country.iso2}
                         dialCode={country.dialCode}
                         localization={localization && localization[country.name]}
-                        className={classes.flagIcon}
                       />
                     ))}
                   </Menu>
@@ -936,4 +931,4 @@ MaterialUiPhoneNumber.defaultProps = {
 
 MaterialUiPhoneNumber.displayName = 'MuiPhoneNumber'
 
-export default withStyles(styles)(MaterialUiPhoneNumber)
+export default MaterialUiPhoneNumber
