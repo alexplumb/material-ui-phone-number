@@ -1,11 +1,11 @@
-const path = require('path');
+const path = require('path')
 
-const ROOT_PATH = path.resolve(__dirname);
+const ROOT_PATH = path.resolve(__dirname)
 
 // Common configuration settings
 module.exports = {
   entry: {
-    'material-ui-phone-number': path.resolve(ROOT_PATH, 'src/index.js'),
+    'material-ui-phone-number-2': path.resolve(ROOT_PATH, 'src/index.js'),
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -27,10 +27,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react',
-            ],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
             plugins: [
               ['@babel/plugin-proposal-class-properties', { loose: false }],
               '@babel/plugin-proposal-object-rest-spread',
@@ -45,12 +42,8 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'less-loader' },
-        ],
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'less-loader' }],
       },
     ],
   },
-};
+}

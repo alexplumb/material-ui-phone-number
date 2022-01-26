@@ -1,4 +1,4 @@
-# material-ui-phone-number
+# material-ui-phone-number-2
 
 Highly customizable phone input component with auto formatting. Based on [mui-phone-number](https://github.com/alexplumb/material-ui-phone-number) which is not maintained anymore; and which was in turn based on the wonderful [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2) package.
 
