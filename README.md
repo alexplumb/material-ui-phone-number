@@ -13,7 +13,7 @@ Uses @material-ui/core/TextField for rendering the phone input
 ## Installation
 
 ```shell-script
-npm install material-ui-phone-number2 --save
+npm install material-ui-phone-number-2 --save
 ```
 
 ## Usage
