@@ -905,7 +905,7 @@ const rawAllCountries = [
     ['africa', 'north-africa'],
     'ma',
     '212',
-    '+212-.........',
+    '+...-.........',
   ],
   [
     'Mozambique',
