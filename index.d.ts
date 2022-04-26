@@ -1,6 +1,12 @@
 import { TextFieldProps } from "@mui/material";
 import * as React from "react";
 
+type CountryData = {
+  name?: string
+  dialCode?: string
+  countryCode?: string
+}
+
 export type MuiPhoneNumberProps = TextFieldProps & {
   autoFormat?: boolean;
   classes?: any;
@@ -13,9 +19,7 @@ export type MuiPhoneNumberProps = TextFieldProps & {
   enableLongNumbers?: boolean;
   excludeCountries?: string[];
   inputClass?: string;
-  onChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string
-  ) => void;
+  onChange: (value: string, countryData: CountryData) => void;
   onlyCountries?: string[];
   preferredCountries?: string[];
   regions?: [string] | string;
