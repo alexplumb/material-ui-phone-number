@@ -19,7 +19,7 @@ npm install material-ui-phone-number-2 --save
 ## Usage
 
 ```jsx
-import MuiPhoneNumber from 'material-ui-phone-number2'
+import MuiPhoneNumber from 'material-ui-phone-number-2'
 
 React.render(<MuiPhoneNumber defaultCountry={'us'} onChange={handleOnChange} />, document.getElementById('root'))
 ```
@@ -153,13 +153,13 @@ function handleOnChange(value) {
 Regions selected: {'europe'}
 
 ```jsx
-<MuiPhoneInput defaultCountry="it" regions={'europe'} />
+<MuiPhoneNumber defaultCountry="it" regions={'europe'} />
 ```
 
 Regions selected: {['north-america', 'carribean']}
 
 ```jsx
-<MuiPhoneInput defaultCountry="ca" regions={['north-america', 'carribean']} />
+<MuiPhoneNumber defaultCountry="ca" regions={['north-america', 'carribean']} />
 ```
 
 ### Localization
@@ -176,10 +176,7 @@ Regions selected: {['north-america', 'carribean']}
 </table>
 
 ```jsx
-<MuiPhoneInput
-  onlyCountries=['de', 'es']
-  localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
-/>
+<MuiPhoneNumber onlyCountries={['de', 'es']} localization={{ Germany: 'Deutschland', Spain: 'España' }} />
 ```
 
 ### Supported events
