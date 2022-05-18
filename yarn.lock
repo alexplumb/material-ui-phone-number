@@ -1764,8 +1764,8 @@ core-util-is@~1.0.0:
   resolved "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz"
 
 country-flag-icons@^1.4.10:
-  version "1.4.25"
-  resolved "https://registry.yarnpkg.com/country-flag-icons/-/country-flag-icons-1.4.25.tgz#0ddd1d44106ed013e1b5c506de793a60af5c4a6c"
+  version "1.4.26"
+  resolved "https://registry.yarnpkg.com/country-flag-icons/-/country-flag-icons-1.4.26.tgz#e324b2e79c00f180d4f44a8ce034a3e824097619"
 
 cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
