@@ -1359,7 +1359,7 @@ const rawAllCountries = [
     ['africa'],
     'tg',
     '228',
-    '+... ... .....',
+    '+... .. .. .. ..',
   ],
   [
     'Tokelau',
