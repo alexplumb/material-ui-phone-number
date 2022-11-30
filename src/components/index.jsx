@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import Flags from 'country-flag-icons/react/3x2'
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
@@ -603,7 +602,10 @@ class MaterialUiPhoneNumber extends React.Component {
 
     const isSelected = (country) => Boolean(selectedCountry && selectedCountry.dialCode === country.dialCode);
 
-    const FlagComponent = Flags[selectedCountry.iso2.toUpperCase()];
+    const countryCode = selectedCountry.iso2.toUpperCase()
+    const FlagComponent = () => (<img
+      alt={countryCode}
+      src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${countryCode}.svg`}/>)
 
     const dropdownProps = disableDropdown ? {} : {
       startAdornment: (
