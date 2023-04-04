@@ -58,7 +58,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "country-flag-icons": "^1.4.10",
+    "country-flag-icons": "^1.5.7",
     "lodash": "^4.17.21"
   },
   "peerDependencies": {
