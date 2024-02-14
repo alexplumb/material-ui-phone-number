@@ -858,6 +858,12 @@ const rawAllCountries = [
     '+... . ... ....',
   ],
   [
+    'Mayotte',
+    ['africa'],
+    'yt',
+    '262',
+  ],
+  [
     'Mexico',
     ['america', 'central-america'],
     'mx',
